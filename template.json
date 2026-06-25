@@ -12,6 +12,16 @@
       "danoCritico": 0,
       "energia": 0,
       "energiaMaxima": 0,
+      "resources": {
+        "resistencia": {
+          "value": 10,
+          "max": 10
+        },
+        "energia": {
+          "value": 0,
+          "max": 0
+        }
+      },
       "caminhoFolego": "",
 
       "protecao": {
@@ -40,6 +50,16 @@
       "descricao": "",
       "resistencia": 10,
       "dano": 0,
+      "resources": {
+        "resistencia": {
+          "value": 10,
+          "max": 10
+        },
+        "energia": {
+          "value": 0,
+          "max": 0
+        }
+      },
       "modoEdicao": false,
       "defesaPassiva": 0,
       "defesaAtiva": 0,

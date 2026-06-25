@@ -1812,6 +1812,87 @@ Hooks.once("init", async function () {
     return Number.isFinite(parsed) ? parsed : fallback;
   };
 
+  const asArrayValue = value => {
+    if (Array.isArray(value)) return value;
+    return Object.values(value || {});
+  };
+
+  const normalizeNameValue = value => String(value || "")
+    .trim()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase();
+
+  const resistanceBonusForAbility = habilidade => {
+    const nome = normalizeNameValue(habilidade?.nome);
+    const nivel = numberValue(habilidade?.nivel);
+    if (nome === "boxe") return nivel >= 2 ? nivel - 1 : 0;
+    if (["acrobacia", "corrida", "forca fisica", "natacao", "escalada", "capoeira", "luta livre"].includes(nome) && nivel >= 3) return 1;
+    return 0;
+  };
+
+  const supernaturalEnergyMaximum = system => {
+    const habilidades = asArrayValue(system?.habilidades);
+    for (const info of Object.values(CAMINHOS_SOBRENATURAIS)) {
+      const habilidade = habilidades.find(entry =>
+        normalizeNameValue(entry?.nome) === normalizeNameValue(info.habilidade)
+        && numberValue(entry?.nivel) > 0
+      );
+      if (habilidade) return [0, 5, 10, 20][Math.max(0, Math.min(3, numberValue(habilidade.nivel)))] || 0;
+    }
+    return 0;
+  };
+
+  const calculateActorResources = (type, system = {}) => {
+    if (type === "personagem") {
+      const habilidades = asArrayValue(system.habilidades);
+      const bonusResistencia = habilidades.reduce((total, habilidade) => total + resistanceBonusForAbility(habilidade), 0);
+      const resistenciaBase = Math.min(15, 10 + bonusResistencia);
+      const resistenciaMaxima = resistenciaBase + Math.max(0, numberValue(system.resistenciaTemporaria));
+      const resistenciaAtual = Math.max(0, resistenciaMaxima - Math.max(0, numberValue(system.dano)));
+      const energiaMaxima = supernaturalEnergyMaximum(system);
+      const energiaAtual = Math.max(0, Math.min(energiaMaxima, numberValue(system.energia)));
+      return {
+        resistencia: { value: resistenciaAtual, max: resistenciaMaxima },
+        energia: { value: energiaAtual, max: energiaMaxima }
+      };
+    }
+
+    if (type === "criatura") {
+      const resistenciaMaxima = Math.max(1, numberValue(system.resistencia, 10));
+      const resistenciaAtual = Math.max(0, resistenciaMaxima - Math.max(0, numberValue(system.dano)));
+      return {
+        resistencia: { value: resistenciaAtual, max: resistenciaMaxima },
+        energia: { value: 0, max: 0 }
+      };
+    }
+
+    return null;
+  };
+
+  const setResourceChanges = (changes, type, system) => {
+    const resources = calculateActorResources(type, system);
+    if (!resources) return;
+    foundry.utils.setProperty(changes, "system.resources.resistencia.value", resources.resistencia.value);
+    foundry.utils.setProperty(changes, "system.resources.resistencia.max", resources.resistencia.max);
+    foundry.utils.setProperty(changes, "system.resources.energia.value", resources.energia.value);
+    foundry.utils.setProperty(changes, "system.resources.energia.max", resources.energia.max);
+  };
+
+  const syncActorResources = async actor => {
+    if (!["personagem", "criatura"].includes(actor?.type)) return;
+    const update = {};
+    setResourceChanges(update, actor.type, actor.system || {});
+    if (!actor.prototypeToken?.bar1?.attribute) foundry.utils.setProperty(update, "prototypeToken.bar1.attribute", "resources.resistencia");
+    if (!actor.prototypeToken?.bar2?.attribute) foundry.utils.setProperty(update, "prototypeToken.bar2.attribute", "resources.energia");
+    const flattened = foundry.utils.flattenObject(update);
+    for (const [path, value] of Object.entries(flattened)) {
+      if (foundry.utils.getProperty(actor, path) === value) delete flattened[path];
+    }
+    if (!Object.keys(flattened).length) return;
+    await actor.update(foundry.utils.expandObject(flattened));
+  };
+
   const askDamageAmount = async (amount, actorName = "alvo") => {
     const baseDamage = Math.max(0, numberValue(amount));
     const halfDamage = Math.max(1, Math.floor(baseDamage / 2));
@@ -2068,12 +2149,32 @@ Hooks.once("init", async function () {
   Hooks.on("renderChatMessage", activateDamageButtons);
   Hooks.on("renderChatMessageHTML", activateDamageButtons);
 
+  Hooks.on("preCreateActor", actor => {
+    if (!["personagem", "criatura"].includes(actor?.type)) return;
+    const changes = {
+      prototypeToken: {
+        bar1: { attribute: "resources.resistencia" },
+        bar2: { attribute: "resources.energia" }
+      }
+    };
+    setResourceChanges(changes, actor.type, actor.system || {});
+    actor.updateSource(changes);
+  });
+
   Hooks.on("preUpdateActor", (actor, changes) => {
     if (!["personagem", "criatura"].includes(actor?.type)) return;
-    if (!Object.prototype.hasOwnProperty.call(changes, "name")) return;
-    const nextName = String(changes.name || "").trim();
-    if (!nextName) return;
-    foundry.utils.setProperty(changes, "prototypeToken.name", nextName);
+    const expandedChanges = foundry.utils.expandObject(foundry.utils.deepClone(changes));
+    const nextSystem = foundry.utils.mergeObject(
+      foundry.utils.deepClone(actor.system || {}),
+      expandedChanges.system || {},
+      { inplace: false }
+    );
+    setResourceChanges(changes, actor.type, nextSystem);
+
+    if (Object.prototype.hasOwnProperty.call(changes, "name")) {
+      const nextName = String(changes.name || "").trim();
+      if (nextName) foundry.utils.setProperty(changes, "prototypeToken.name", nextName);
+    }
   });
 
   Hooks.once("ready", async () => {
@@ -2083,6 +2184,9 @@ Hooks.once("init", async function () {
       const actorName = String(actor.name || "").trim();
       if (!actorName || actor.prototypeToken?.name === actorName) continue;
       await actor.update({ "prototypeToken.name": actorName });
+    }
+    for (const actor of game.actors || []) {
+      await syncActorResources(actor);
     }
     await seedCreatureCompendium();
   });
