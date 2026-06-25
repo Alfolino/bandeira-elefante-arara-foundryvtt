@@ -1,0 +1,11 @@
+.DS_Store
+Thumbs.db
+
+# Foundry/runtime artifacts
+*.log
+*.tmp
+
+# Local editor files
+.vscode/
+.idea/
+

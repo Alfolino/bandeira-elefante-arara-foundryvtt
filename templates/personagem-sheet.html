@@ -1,0 +1,339 @@
+<form class="bandeira-sheet" autocomplete="off">
+  <header class="hero-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="Alterar retrato de {{actor.name}}" />
+
+    <div class="identity">
+      <span class="eyebrow">A Bandeira do Elefante e da Arara</span>
+      <input class="char-name" name="name" type="text" value="{{actor.name}}" placeholder="Nome do personagem" />
+      <div class="identity-details">
+        <label>
+          <span>Idade</span>
+          <input type="text" name="system.idade" value="{{system.idade}}" placeholder="&mdash;" />
+        </label>
+        <span class="status-pill {{estadoClasse}}">{{estado}}</span>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button type="button" class="header-edit-lock edit-lock-button {{#if modoEdicao}}unlocked{{/if}}" data-action="toggle-edit-mode" title="{{#if modoEdicao}}Travar edição{{else}}Liberar edição{{/if}}" aria-label="{{#if modoEdicao}}Travar edição{{else}}Liberar edição{{/if}}">
+        <i class="fa-solid {{#if modoEdicao}}fa-unlock{{else}}fa-lock{{/if}}"></i>
+      </button>
+      <button type="button" class="header-roll-button" data-action="roll-generico" title="Rolagem livre de 3d6" aria-label="Rolagem livre de 3d6">
+        <i class="fa-solid fa-dice"></i>
+      </button>
+    </div>
+
+  </header>
+
+  <nav class="sheet-tabs" aria-label="Seções da ficha">
+    <button type="button" data-tab="resumo">Personagem</button>
+    <button type="button" data-tab="habilidades">Habilidades</button>
+    <button type="button" data-tab="combate">Combate</button>
+    <button type="button" data-tab="recursos">Poderes</button>
+  </nav>
+
+  <main class="sheet-body">
+    <section class="tab-panel" data-tab-panel="resumo">
+      <div class="dashboard-grid">
+        <article class="card story-card">
+          <div class="card-heading">
+            <div>
+              <h2>Histórico</h2>
+            </div>
+          </div>
+          <textarea name="system.historico" placeholder="Origem, ofício, motivações e acontecimentos importantes...">{{system.historico}}</textarea>
+        </article>
+
+        <article class="card traits-card">
+          <div class="card-heading">
+            <div>
+              <h2>Características</h2>
+            </div>
+          </div>
+          <input type="text" name="system.caracteristica1" value="{{system.caracteristica1}}" placeholder="Primeira característica" />
+          <input type="text" name="system.caracteristica2" value="{{system.caracteristica2}}" placeholder="Segunda característica" />
+          <input type="text" name="system.caracteristica3" value="{{system.caracteristica3}}" placeholder="Terceira característica" />
+        </article>
+
+        <article class="card goods-card full-card">
+          <div class="card-heading possessions-heading">
+            <h2>Bens</h2>
+            <div class="money-corner">
+              <div class="money-input-wrap" title="Dinheiro em réis"><input type="hidden" name="system.dinheiro" value="{{dinheiro}}" /><input type="text" inputmode="numeric" data-transient data-money-input value="{{dinheiroFormatado}}" aria-label="Dinheiro em réis" /><i class="fa-solid fa-coins"></i></div>
+            </div>
+          </div>
+          <textarea name="system.bens" placeholder="Roupas, ferramentas, animais, joias e outros objetos...">{{system.bens}}</textarea>
+        </article>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-tab-panel="habilidades">
+      <article class="card full-card">
+        <div class="card-heading skills-heading">
+          <div>
+            <h2>Pontos de Aprendizagem</h2>
+          </div>
+
+          <div class="points-summary {{#if pontosExcedidos}}over{{/if}}">
+            <label title="Total acumulado recebido após as sessões"><span>Ganhos</span><input type="number" min="0" name="system.pontosGanhos" value="{{pontosGanhos}}" {{#unless modoEdicao}}disabled{{/unless}} /></label>
+            <span class="points-operator">+</span>
+            <label title="O padrão do livro é 20, mas o mestre pode alterar"><span>Iniciais</span><input type="number" min="0" name="system.pontosIniciais" value="{{pontosIniciais}}" {{#unless modoEdicao}}disabled{{/unless}} /></label>
+            <span class="points-operator">=</span>
+            <div class="points-total"><span>Total</span><strong>{{pontosTotaisRecebidos}}</strong></div>
+            <div class="points-available"><span>Disponíveis</span><strong>{{pontosDisponiveis}}</strong></div>
+          </div>
+          <button type="button" class="accent-button" data-action="add-habilidade" {{#unless modoEdicao}}disabled{{/unless}} {{#if limiteHabilidades}}disabled{{/if}}>+ Habilidade</button>
+        </div>
+
+        <div class="skills-grid-list">
+          {{#each habilidades}}
+            <div class="skill-card-row">
+              <button type="button" class="roll-button" data-action="roll-habilidade" data-index="{{this.index}}" title="Rolar {{this.nome}}"><i class="fa-solid fa-dice"></i></button>
+              <div class="skill-card-main">
+                {{#if this.catalogada}}
+                  <input type="hidden" name="system.habilidades.{{@index}}.nome" value="{{this.nome}}" />
+                  <span class="catalog-skill-name">{{this.nome}}</span>
+                {{else}}
+                  <input type="text" name="system.habilidades.{{@index}}.nome" value="{{this.nome}}" placeholder="Habilidade personalizada" {{#unless ../modoEdicao}}disabled{{/unless}} />
+                {{/if}}
+                <input type="hidden" name="system.habilidades.{{@index}}.categoria" value="{{this.categoria}}" />
+              </div>
+              <input type="hidden" name="system.habilidades.{{@index}}.nivel" value="{{this.nivel}}" />
+              <div class="skill-level-control {{#unless ../modoEdicao}}locked{{/unless}}">
+                <button type="button" data-action="adjust-habilidade-level" data-index="{{this.index}}" data-amount="-1" {{#unless ../modoEdicao}}disabled{{/unless}} {{#unless this.podeDiminuir}}disabled{{/unless}}>&minus;</button>
+                <span class="skill-level level-{{this.nivel}}" title="Nível máximo: {{this.nivelMaximo}}"><span>Nível</span><strong>{{this.nivel}}</strong></span>
+                <button type="button" data-action="adjust-habilidade-level" data-index="{{this.index}}" data-amount="1" {{#unless ../modoEdicao}}disabled{{/unless}} {{#unless this.podeAumentar}}disabled{{/unless}}>+</button>
+              </div>
+              {{#if ../modoEdicao}}<button type="button" class="delete-button" data-action="remove-habilidade" data-index="{{this.index}}" title="Remover habilidade">&times;</button>{{/if}}
+            </div>
+          {{else}}
+            <div class="empty-row skill-empty">Adicione a primeira habilidade do personagem.</div>
+          {{/each}}
+        </div>
+        <p class="rules-note">Máximo de 20 habilidades. Custos acumulados: Aprendiz 1, Praticante 3 e Mestre 7. Após a criação, uma habilidade só pode subir um nível por sessão.</p>
+      </article>
+    </section>
+
+    <section class="tab-panel" data-tab-panel="combate">
+      <div class="combat-condition-grid">
+        <article class="card condition-card">
+          <div class="card-heading">
+            <div>
+              <h2>Resistência</h2>
+            </div>
+            <div class="resistance-total"><strong>{{resistenciaLivre}}</strong><span>/ {{resistenciaMaximaAtual}}</span></div>
+          </div>
+
+          <div class="meter resistance-meter" aria-label="Resistência livre">
+            <span style="width: {{resistenciaPercentual}}%"></span>
+          </div>
+
+          <div class="resistance-fields">
+            <div class="stepper-field temporary-resistance">
+              <span>Bônus temporário</span>
+              <div class="stepper">
+                <button type="button" data-action="adjust-condition" data-field="resistenciaTemporaria" data-amount="-1" title="Remover um ponto temporário">&minus;</button>
+                <input type="number" min="0" name="system.resistenciaTemporaria" value="{{resistenciaTemporaria}}" />
+                <button type="button" data-action="adjust-condition" data-field="resistenciaTemporaria" data-amount="1" title="Adicionar um ponto temporário">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="damage-section">
+            <div class="damage-fields">
+            <div class="stepper-field">
+              <span>Dano</span>
+              <div class="stepper">
+                <button type="button" data-action="adjust-condition" data-field="dano" data-amount="-1" title="Curar um ponto">&minus;</button>
+                <input type="number" min="0" name="system.dano" value="{{system.dano}}" />
+                <button type="button" data-action="adjust-condition" data-field="dano" data-amount="1" title="Sofrer um ponto de dano">+</button>
+              </div>
+            </div>
+            <div class="stepper-field critical">
+              <span>Dano crítico</span>
+              <div class="stepper">
+                <button type="button" data-action="adjust-condition" data-field="danoCritico" data-amount="-1">&minus;</button>
+                <input type="number" min="0" max="5" name="system.danoCritico" value="{{system.danoCritico}}" />
+                <button type="button" data-action="adjust-condition" data-field="danoCritico" data-amount="1">+</button>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          {{#if ferido}}<div class="rule-alert warning">Ferido: todas as habilidades perdem um nível.</div>{{/if}}
+          {{#if inconsciente}}<div class="rule-alert danger">Inconsciente: cure o dano crítico e pelo menos um dano normal.</div>{{/if}}
+        </article>
+
+        <article class="card defense-card">
+          <div class="card-heading">
+            <div>
+              <h2>Defesa</h2>
+            </div>
+            <button type="button" class="primary-action defense-initiative-button" data-action="roll-iniciativa" title="Iniciativa" aria-label="Iniciativa">
+              <i class="fa-solid fa-person-running"></i>
+            </button>
+          </div>
+          <div class="defense-values">
+            <label>
+              <span>Passiva</span>
+              <strong>{{defesaPassivaCalculada}}</strong>
+            </label>
+            <label>
+              <span>Ativa</span>
+              <strong>{{defesaAtivaCalculada}}</strong>
+            </label>
+          </div>
+
+          <div class="protection-controls">
+            <label class="equipment-toggle">
+              <input type="checkbox" name="system.protecao.capacete" data-dtype="Boolean" {{#if system.protecao.capacete}}checked{{/if}} />
+              <span class="equipment-icon" title="Capacete" aria-label="Capacete"><i class="fa-solid fa-helmet-safety"></i></span>
+            </label>
+            <label class="equipment-toggle">
+              <input type="checkbox" name="system.protecao.peitoral" data-dtype="Boolean" {{#if system.protecao.peitoral}}checked{{/if}} />
+              <span class="equipment-icon" title="Colete ou peitoral" aria-label="Colete ou peitoral"><i class="fa-solid fa-shirt"></i></span>
+            </label>
+            <label class="equipment-toggle">
+              <input type="checkbox" name="system.protecao.escudo" data-dtype="Boolean" {{#if system.protecao.escudo}}checked{{/if}} />
+              <span class="equipment-icon" title="Escudo" aria-label="Escudo"><i class="fa-solid fa-shield-halved"></i></span>
+            </label>
+
+            <label class="protection-field">
+              <span>Arma em mãos</span>
+              <select name="system.protecao.armaDefensiva">
+                <option value="desarmado" {{#if (eq armaDefensiva "desarmado")}}selected{{/if}}>Desarmado</option>
+                {{#each armasDefesa}}
+                  <option value="{{this.index}}" {{#if (eq this.index ../armaDefensiva)}}selected{{/if}}>{{this.nome}}</option>
+                {{/each}}
+              </select>
+            </label>
+
+            <label class="protection-field compact-protection-field">
+              <span>Outros bônus</span>
+              <input type="number" min="0" max="5" name="system.protecao.bonusExtra" value="{{system.protecao.bonusExtra}}" />
+            </label>
+          </div>
+        </article>
+      </div>
+
+      <article class="card full-card">
+        <div class="card-heading">
+          <div>
+            <h2>Armas</h2>
+          </div>
+          <button type="button" class="accent-button" data-action="add-arma" {{#unless modoEdicao}}disabled{{/unless}}>+ Arma</button>
+        </div>
+
+        <div class="weapons-card-list">
+          {{#each armas}}
+            <div class="weapon-card-row">
+              <div class="weapon-card-top">
+                <button type="button" class="roll-button" data-action="roll-arma" data-index="{{this.index}}" title="Rolar ataque com {{this.nome}}"><i class="fa-solid fa-hand-fist"></i></button>
+                <div class="weapon-card-title">
+                  <input type="hidden" name="system.armas.{{@index}}.nome" value="{{this.nome}}" />
+                  <input type="hidden" name="system.armas.{{@index}}.forcaBonus" value="{{this.forcaBonus}}" data-dtype="Boolean" />
+                  <strong>{{this.nome}}</strong>
+                  <div class="weapon-card-tags">
+                    <input type="hidden" name="system.armas.{{@index}}.tipoHabilidade" value="{{this.tipoHabilidade}}" />
+                    <span class="weapon-badge">{{this.tipoHabilidade}}</span>
+                    <input type="hidden" name="system.armas.{{@index}}.maos" value="{{this.maos}}" />
+                    <span class="weapon-badge compact">{{this.maos}} mãos</span>
+                    <input type="hidden" name="system.armas.{{@index}}.alcance" value="{{this.alcance}}" />
+                    <span class="weapon-badge">{{this.alcance}}</span>
+                    <input type="hidden" name="system.armas.{{@index}}.recarga" value="{{this.recarga}}" />
+                    <span class="weapon-badge">{{#if this.recarga}}{{this.recarga}}{{else}}&mdash;{{/if}}</span>
+                  </div>
+                </div>
+                <label class="weapon-card-damage"><span>Dano</span><input class="narrow-input" type="number" min="1" name="system.armas.{{@index}}.dano" value="{{this.dano}}" {{#unless ../modoEdicao}}readonly{{/unless}} /></label>
+                {{#if ../modoEdicao}}<button type="button" class="delete-button" data-action="remove-arma" data-index="{{this.index}}" title="Remover arma">&times;</button>{{/if}}
+              </div>
+              <label class="weapon-card-notes">Notas <input type="text" name="system.armas.{{@index}}.notas" value="{{this.notas}}" /></label>
+            </div>
+          {{else}}
+            <div class="empty-row weapon-empty">Adicione uma arma para realizar ataques.</div>
+          {{/each}}
+        </div>
+      </article>
+    </section>
+
+    <section class="tab-panel" data-tab-panel="recursos">
+      <div class="resources-grid">
+        <article class="card energy-card">
+          <div class="card-heading">
+            <div>
+              <h2>Energia</h2>
+            </div>
+            <div class="energy-total"><strong>{{energiaAtual}}</strong><span>/ {{energiaMaxima}}</span></div>
+          </div>
+          <div class="meter energy-meter"><span style="width: {{energiaPercentual}}%"></span></div>
+          <div class="energy-fields">
+            {{#if temCaminhoSobrenatural}}
+              <div class="energy-path-highlight"><strong>{{caminhoNome}}</strong><span>Nível {{nivelBaseSobrenatural}}</span></div>
+            {{else}}
+              <div class="energy-source">Adquira Fé, Fôlego ou Ifá na aba Habilidades</div>
+            {{/if}}
+            {{#if caminhoFolegoAtivo}}
+              <label class="folego-path-field"><span>Linha do Fôlego</span>
+                <select data-transient data-action="set-supernatural-path">
+                  <option value="" {{#if (eq caminhoFolego "")}}selected{{/if}}>Escolha...</option>
+                  <option value="bem" {{#if (eq caminhoFolego "bem")}}selected{{/if}}>Caminho do bem</option>
+                  <option value="mal" {{#if (eq caminhoFolego "mal")}}selected{{/if}}>Caminho do mal</option>
+                </select>
+              </label>
+            {{/if}}
+            <div class="stepper-field energy-current-control">
+              <div class="stepper">
+                <button type="button" data-action="adjust-condition" data-field="energia" data-amount="-1">&minus;</button>
+                <input type="number" min="0" max="{{energiaMaxima}}" name="system.energia" value="{{energiaAtual}}" />
+                <button type="button" data-action="adjust-condition" data-field="energia" data-amount="1">+</button>
+              </div>
+            </div>
+            <button type="button" class="rest-button" data-action="restore-energy" title="Descanso completo" aria-label="Descanso completo"><i class="fa-solid fa-bed"></i></button>
+          </div>
+        </article>
+
+        <article class="card full-card powers-card">
+          <div class="card-heading">
+            <div>
+              <h2>Poderes sobrenaturais</h2>
+            </div>
+            <button type="button" class="accent-button" data-action="add-poder" {{#unless modoEdicao}}disabled{{/unless}}>+ Poder</button>
+          </div>
+
+          <div class="powers-card-list">
+            {{#each poderes}}
+              <div class="power-card-row">
+                <div class="power-card-top">
+                  <button type="button" class="roll-button" data-action="use-poder" data-index="{{this.index}}" title="Usar {{this.nome}}"><i class="fa-solid fa-hand-sparkles"></i></button>
+                  <div class="power-card-title">
+                    <strong class="power-name">{{this.nome}}</strong>
+                    <input type="hidden" name="system.poderes.{{@index}}.nome" value="{{this.nome}}" />
+                    <input type="hidden" name="system.poderes.{{@index}}.grupo" value="{{this.grupo}}" />
+                    <span class="category-tag">{{this.grupo}}</span>
+                  </div>
+                  <div class="skill-level-control {{#unless ../modoEdicao}}locked{{/unless}}">
+                    {{#if ../modoEdicao}}<button type="button" data-action="adjust-poder-level" data-index="{{this.index}}" data-amount="-1" {{#unless this.podeDiminuir}}disabled{{/unless}}>&minus;</button>{{/if}}
+                    <span class="skill-level"><span>Nível</span><strong>{{this.nivel}}</strong></span><input type="hidden" name="system.poderes.{{@index}}.nivel" value="{{this.nivel}}" />
+                    {{#if ../modoEdicao}}<button type="button" data-action="adjust-poder-level" data-index="{{this.index}}" data-amount="1" {{#unless this.podeAumentar}}disabled{{/unless}}>+</button>{{/if}}
+                  </div>
+                  {{#if ../modoEdicao}}<button type="button" class="delete-button" data-action="remove-poder" data-index="{{this.index}}" title="Remover poder">&times;</button>{{/if}}
+                </div>
+                <div class="power-card-notes">
+                  <span class="power-notes-label">Notas</span>
+                  {{#if this.personalizado}}
+                    <textarea rows="2" name="system.poderes.{{@index}}.notas">{{this.notas}}</textarea>
+                  {{else}}
+                    <input type="hidden" name="system.poderes.{{@index}}.notas" value="{{this.notas}}" />
+                    <div class="power-notes-text">{{this.notas}}</div>
+                  {{/if}}
+                </div>
+              </div>
+            {{else}}
+              <div class="empty-row power-empty">Adicione o primeiro poder sobrenatural do personagem.</div>
+            {{/each}}
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</form>

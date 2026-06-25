@@ -1,0 +1,155 @@
+<form class="bandeira-sheet creature-sheet" autocomplete="off">
+  <header class="hero-header creature-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="Alterar imagem de {{actor.name}}" />
+    <div class="identity">
+      <span class="eyebrow">Bestiário</span>
+      <input class="char-name" name="name" type="text" value="{{actor.name}}" placeholder="Nome da criatura" {{#unless modoEdicao}}disabled{{/unless}} />
+      <div class="creature-header-stats">
+        <label><span>Tamanho</span><input type="text" name="system.tamanho" value="{{system.tamanho}}" {{#unless modoEdicao}}disabled{{/unless}} /></label>
+        <label><span>Movimento</span><input type="number" min="0" max="10" name="system.movimento" value="{{system.movimento}}" {{#unless modoEdicao}}disabled{{/unless}} /></label>
+        <label><span>Def. passiva</span><input type="number" min="0" name="system.defesaPassiva" value="{{system.defesaPassiva}}" {{#unless modoEdicao}}disabled{{/unless}} /></label>
+        <label><span>Def. ativa</span><input type="number" min="0" name="system.defesaAtiva" value="{{system.defesaAtiva}}" {{#unless modoEdicao}}disabled{{/unless}} /></label>
+        <span class="status-pill {{estadoClasse}}">{{estado}}</span>
+      </div>
+    </div>
+    <div class="header-actions creature-header-actions">
+      <button type="button" class="header-edit-lock edit-lock-button {{#if modoEdicao}}unlocked{{/if}}" data-action="toggle-edit-mode" title="{{#if modoEdicao}}Travar edição{{else}}Liberar edição{{/if}}" aria-label="{{#if modoEdicao}}Travar edição{{else}}Liberar edição{{/if}}">
+        <i class="fa-solid {{#if modoEdicao}}fa-unlock{{else}}fa-lock{{/if}}"></i>
+      </button>
+      <button type="button" class="header-roll-button" data-action="roll-generico" title="Rolagem livre de 3d6" aria-label="Rolagem livre de 3d6"><i class="fa-solid fa-dice"></i></button>
+    </div>
+  </header>
+
+  <nav class="sheet-tabs" aria-label="Seções da ficha de criatura">
+    <button type="button" data-tab="combate">Combate</button>
+    <button type="button" data-tab="descricao">Descrição</button>
+  </nav>
+
+  <main class="sheet-body creature-body">
+    <section class="tab-panel" data-tab-panel="combate">
+      <div class="creature-overview-grid">
+        <article class="card creature-combat-card">
+          <div class="card-heading">
+            <h2>Condição física</h2>
+            <div class="resistance-total"><strong>{{resistenciaLivre}}</strong><span>/ {{resistenciaMaxima}}</span></div>
+          </div>
+          <div class="meter resistance-meter"><span style="width: {{resistenciaPercentual}}%"></span></div>
+          <div class="creature-combat-values">
+            <label><span>Resistência</span><input type="number" min="1" name="system.resistencia" value="{{system.resistencia}}" {{#unless modoEdicao}}disabled{{/unless}} /></label>
+            <div class="stepper-field"><span>Dano</span><div class="stepper">
+              <button type="button" data-action="adjust-creature-damage" data-amount="-1">&minus;</button>
+              <input type="number" min="0" max="{{danoMaximo}}" name="system.dano" value="{{system.dano}}" />
+              <button type="button" data-action="adjust-creature-damage" data-amount="1">+</button>
+            </div></div>
+          </div>
+          <div class="creature-movement-summary"><span>Movimento atual</span><strong>{{movimentoAtual}}</strong>{{#if movimentoReduzido}}<small>Reduzido por ferimentos</small>{{/if}}<button type="button" class="creature-initiative-button" data-action="roll-iniciativa" title="Iniciativa" aria-label="Iniciativa"><i class="fa-solid fa-person-running"></i></button></div>
+        </article>
+
+        <article class="card creature-special-card">
+          <div class="card-heading"><h2>Características especiais</h2></div>
+          <textarea name="system.especial" placeholder="Imunidades, sentidos especiais, comportamento em combate e outras regras..." {{#unless modoEdicao}}disabled{{/unless}}>{{system.especial}}</textarea>
+        </article>
+      </div>
+
+      <div class="creature-lists-grid">
+        <article class="card creature-list-card">
+        <div class="card-heading"><h2>Habilidades</h2><button type="button" class="accent-button" data-action="add-creature-skill" {{#unless modoEdicao}}disabled{{/unless}}>+ Habilidade</button></div>
+        <div class="creature-card-list creature-skill-list">
+          {{#each habilidades}}
+            <div class="creature-card-row creature-skill-card">
+              <div class="creature-card-top">
+                <button type="button" class="roll-button" data-action="roll-creature-skill" data-index="{{this.index}}" title="Rolar {{this.nome}}"><i class="fa-solid fa-dice"></i></button>
+                <div class="creature-card-main">
+                  {{#if ../modoEdicao}}
+                    <input type="text" name="system.habilidades.{{@index}}.nome" value="{{this.nome}}" placeholder="Habilidade" />
+                  {{else}}
+                    <input type="hidden" name="system.habilidades.{{@index}}.nome" value="{{this.nome}}" />
+                    <strong>{{#if this.nome}}{{this.nome}}{{else}}Habilidade{{/if}}</strong>
+                  {{/if}}
+                </div>
+                <label class="creature-level"><span>Nível</span>
+                  {{#if ../modoEdicao}}
+                    <input class="narrow-input" type="number" min="0" max="3" name="system.habilidades.{{@index}}.nivel" value="{{this.nivel}}" />
+                  {{else}}
+                    <input type="hidden" name="system.habilidades.{{@index}}.nivel" value="{{this.nivel}}" />
+                    <strong>{{this.nivel}}</strong>
+                  {{/if}}
+                </label>
+                {{#if ../modoEdicao}}<button type="button" class="delete-button" data-action="remove-creature-skill" data-index="{{this.index}}" title="Remover habilidade">&times;</button>{{/if}}
+              </div>
+              <label class="creature-card-notes">Notas
+                {{#if ../modoEdicao}}
+                  <input type="text" name="system.habilidades.{{@index}}.notas" value="{{this.notas}}" />
+                {{else}}
+                  <input type="hidden" name="system.habilidades.{{@index}}.notas" value="{{this.notas}}" />
+                  <div>{{this.notas}}</div>
+                {{/if}}
+              </label>
+            </div>
+          {{else}}
+            <div class="empty-row creature-empty">Adicione habilidades humanas, natas ou sobrenaturais.</div>
+          {{/each}}
+        </div>
+      </article>
+
+        <article class="card creature-list-card">
+        <div class="card-heading"><h2>Ataques físicos</h2><button type="button" class="accent-button" data-action="add-creature-attack" {{#unless modoEdicao}}disabled{{/unless}}>+ Ataque</button></div>
+        <div class="creature-card-list creature-attack-list">
+          {{#each ataques}}
+            <div class="creature-card-row creature-attack-card">
+              <div class="creature-card-top">
+                <button type="button" class="roll-button" data-action="roll-creature-attack" data-index="{{this.index}}" title="Rolar {{this.nome}}"><i class="fa-solid fa-hand-fist"></i></button>
+                <div class="creature-card-main">
+                  {{#if ../modoEdicao}}
+                    <input type="text" name="system.ataques.{{@index}}.nome" value="{{this.nome}}" placeholder="Ataque" />
+                  {{else}}
+                    <input type="hidden" name="system.ataques.{{@index}}.nome" value="{{this.nome}}" />
+                    <strong>{{#if this.nome}}{{this.nome}}{{else}}Ataque{{/if}}</strong>
+                  {{/if}}
+                  {{#if ../modoEdicao}}
+                    <input type="text" name="system.ataques.{{@index}}.alcance" value="{{this.alcance}}" placeholder="Uso / alcance" />
+                  {{else}}
+                    <input type="hidden" name="system.ataques.{{@index}}.alcance" value="{{this.alcance}}" />
+                    <span class="weapon-badge">{{this.alcance}}</span>
+                  {{/if}}
+                </div>
+                <label class="creature-level"><span>Nível</span>
+                  {{#if ../modoEdicao}}
+                    <input class="narrow-input" type="number" min="0" max="3" name="system.ataques.{{@index}}.nivel" value="{{this.nivel}}" />
+                  {{else}}
+                    <input type="hidden" name="system.ataques.{{@index}}.nivel" value="{{this.nivel}}" />
+                    <strong>{{this.nivel}}</strong>
+                  {{/if}}
+                </label>
+                <label class="creature-damage"><span>Dano</span><input class="narrow-input" type="number" min="0" name="system.ataques.{{@index}}.dano" value="{{this.dano}}" {{#unless ../modoEdicao}}readonly{{/unless}} /></label>
+                {{#if ../modoEdicao}}<button type="button" class="delete-button" data-action="remove-creature-attack" data-index="{{this.index}}" title="Remover ataque">&times;</button>{{/if}}
+              </div>
+              <label class="creature-card-notes">Efeito secundário
+                {{#if ../modoEdicao}}
+                  <input type="text" name="system.ataques.{{@index}}.efeito" value="{{this.efeito}}" placeholder="Envenenar, Paralisar..." />
+                {{else}}
+                  <input type="hidden" name="system.ataques.{{@index}}.efeito" value="{{this.efeito}}" />
+                  <div>{{this.efeito}}</div>
+                {{/if}}
+              </label>
+            </div>
+          {{else}}
+            <div class="empty-row creature-empty">Adicione os ataques naturais ou armados da criatura.</div>
+          {{/each}}
+        </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-tab-panel="descricao">
+      <article class="card creature-description-card full-card">
+        <div class="card-heading"><h2>Descrição</h2></div>
+        <div class="creature-meta-fields">
+          <label><span>Habitat</span><input type="text" name="system.habitat" value="{{system.habitat}}" placeholder="Matas, rios, litoral..." {{#unless modoEdicao}}disabled{{/unless}} /></label>
+          <label><span>Número</span><input type="text" name="system.numero" value="{{system.numero}}" placeholder="1 a 4" {{#unless modoEdicao}}disabled{{/unless}} /></label>
+        </div>
+        <textarea name="system.descricao" placeholder="Aparência, comportamento e informações para o mediador..." {{#unless modoEdicao}}disabled{{/unless}}>{{system.descricao}}</textarea>
+      </article>
+    </section>
+  </main>
+</form>

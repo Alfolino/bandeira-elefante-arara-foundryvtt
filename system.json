@@ -1,0 +1,42 @@
+{
+  "id": "bandeira-elefante-arara",
+  "title": "A Bandeira do Elefante e da Arara",
+  "description": "Sistema para Foundry VTT",
+  "version": "0.2.3",
+  "authors": [
+    {
+      "name": "Leandro Ferreira"
+    }
+  ],
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14",
+    "maximum": "14"
+  },
+  "esmodules": [
+    "module/bandeira.js"
+  ],
+  "styles": [
+    "styles/bandeira.css"
+  ],
+  "template": "template.json",
+  "documentTypes": {
+    "Actor": {
+      "personagem": {},
+      "criatura": {}
+    }
+  },
+  "primaryTokenAttribute": "",
+  "url": "",
+  "manifest": "",
+  "download": "",
+  "packs": [
+    {
+      "name": "criaturas",
+      "label": "Criaturas",
+      "path": "packs/criaturas",
+      "type": "Actor",
+      "system": "bandeira-elefante-arara"
+    }
+  ]
+}

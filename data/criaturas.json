@@ -1,0 +1,2299 @@
+[
+  {
+    "name": "Alamoa",
+    "system": {
+      "tamanho": "H",
+      "movimento": 3,
+      "habitat": "Áreas litorâneas de ilhas",
+      "numero": "1 a 4",
+      "resistencia": 10,
+      "defesaPassiva": 0,
+      "defesaAtiva": 1,
+      "habilidades": [
+        {
+          "nome": "Encantar",
+          "nivel": 2,
+          "notas": ""
+        },
+        {
+          "nome": "Dança",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Vocal",
+          "nivel": 2,
+          "notas": ""
+        },
+        {
+          "nome": "Persuasão",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Faca",
+          "nivel": 1,
+          "dano": 1,
+          "alcance": "Corpo a corpo",
+          "efeito": "Armas de corte"
+        }
+      ],
+      "especial": "Mulheres são imunes à sua habilidade de Encantar.",
+      "descricao": "Feiticeira alta, branca e loira que habita praias de ilhas rochosas. Evita combate físico e tenta fugir de perigos."
+    }
+  },
+  {
+    "name": "Anhangá",
+    "system": {
+      "tamanho": "K",
+      "movimento": 8,
+      "habitat": "Mata",
+      "numero": "1",
+      "resistencia": 35,
+      "defesaPassiva": 3,
+      "defesaAtiva": 6,
+      "habilidades": [
+        {
+          "nome": "Enlouquecer",
+          "nivel": 2,
+          "notas": "Pode usar uma vez por rodada olhando para um inimigo em seu campo de visão."
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Escornar",
+          "nivel": 3,
+          "dano": 5,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        },
+        {
+          "nome": "Escoicear",
+          "nivel": 2,
+          "dano": 3,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Imune a todas as armas de fogo, mesmo encantadas e lendárias, e a qualquer outra arma que não seja encantada.",
+      "descricao": "Cervo branco e musculoso de tamanho incomum, protetor dos animais da floresta."
+    }
+  },
+  {
+    "name": "Anjo Corredor",
+    "system": {
+      "tamanho": "H",
+      "movimento": 3,
+      "habitat": "Áreas litorâneas habitadas",
+      "numero": "1",
+      "resistencia": 12,
+      "defesaPassiva": 0,
+      "defesaAtiva": 2,
+      "habilidades": [
+        {
+          "nome": "Amedrontar",
+          "nivel": 1,
+          "notas": "Afeta quem ouve suas batidas."
+        },
+        {
+          "nome": "Corrida",
+          "nivel": 2,
+          "notas": ""
+        },
+        {
+          "nome": "Prestidigitação",
+          "nivel": 2,
+          "notas": ""
+        },
+        {
+          "nome": "Escalada",
+          "nivel": 2,
+          "notas": ""
+        },
+        {
+          "nome": "Navegação terrestre",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Fôlego",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Tempo",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Defesa",
+          "nivel": 3,
+          "notas": ""
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Porrete",
+          "nivel": 2,
+          "dano": 2,
+          "alcance": "Corpo a corpo",
+          "efeito": "Armas de golpe"
+        }
+      ],
+      "especial": "Costuma usar Corpo fechado se alguém se aproxima.",
+      "descricao": "Velho nativo sempre em busca da sua tribo perdida. Evita batalhas quando possível."
+    }
+  },
+  {
+    "name": "Ao Ao",
+    "system": {
+      "tamanho": "H",
+      "movimento": 6,
+      "habitat": "Mata",
+      "numero": "1 a 20",
+      "resistencia": 12,
+      "defesaPassiva": 2,
+      "defesaAtiva": 3,
+      "habilidades": [
+        {
+          "nome": "Arranhar",
+          "nivel": 2,
+          "notas": "Dano 2."
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Agarrar e morder",
+          "nivel": 1,
+          "dano": 3,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Nadador nato; salta grandes distâncias; desiste da presa se ela subir em uma palmeira.",
+      "descricao": "Criatura peluda parecida com uma ovelha enorme e suja, mas carnívora e feroz."
+    }
+  },
+  {
+    "name": "Armadeira Gigante",
+    "system": {
+      "tamanho": "G a I",
+      "movimento": 3,
+      "habitat": "Mata, cerrado",
+      "numero": "1 a 20",
+      "resistencia": 10,
+      "defesaPassiva": 0,
+      "defesaAtiva": 2,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Picar",
+          "nivel": 2,
+          "dano": 2,
+          "alcance": "Corpo a corpo",
+          "efeito": "Dois ataques por rodada; aplica Envenenar. Tamanho G dano 1, H dano 2, I dano 3."
+        }
+      ],
+      "especial": "Muito rápida; tem direito a dois ataques por rodada e todo acerto vale teste de Envenenar.",
+      "descricao": "Aranha armadeira de tamanho monstruoso, entre duas e quatro varas de comprimento. Esconde-se nas árvores durante o dia e caça à noite."
+    }
+  },
+  {
+    "name": "Arranca-Línguas",
+    "system": {
+      "tamanho": "N",
+      "movimento": 5,
+      "habitat": "Matas e cerrados",
+      "numero": "1 a 6",
+      "resistencia": 140,
+      "defesaPassiva": 1,
+      "defesaAtiva": 3,
+      "habilidades": [
+        {
+          "nome": "Amedrontar",
+          "nivel": 1,
+          "notas": "Teste contra todos os inimigos presentes na batalha."
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Arranhar",
+          "nivel": 2,
+          "dano": 12,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        },
+        {
+          "nome": "Agarrar e morder",
+          "nivel": 1,
+          "dano": 18,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Costuma fugir ao sofrer dano superior à metade da resistência.",
+      "descricao": "Mico-leão-preto gigantesco, musculoso e dentudo, famoso por arrancar línguas de vítimas."
+    }
+  },
+  {
+    "name": "Besta Fera",
+    "system": {
+      "tamanho": "I",
+      "movimento": 6,
+      "habitat": "Veja descrição",
+      "numero": "1",
+      "resistencia": 15,
+      "defesaPassiva": 1,
+      "defesaAtiva": 4,
+      "habilidades": [
+        {
+          "nome": "Enlouquecer",
+          "nivel": 2,
+          "notas": "Pode usar olhando para qualquer inimigo durante a batalha."
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Chicotear",
+          "nivel": 3,
+          "dano": 3,
+          "alcance": "Corpo a corpo",
+          "efeito": "Chicote encantado."
+        }
+      ],
+      "especial": "Só pode ser ferida por magia, armas encantadas ou armas de prata.",
+      "descricao": "Demônio noturno com parte superior de lobisomem e pernas de cavalo. Espalha caos e solta animais."
+    }
+  },
+  {
+    "name": "Biatatá",
+    "system": {
+      "tamanho": "H a L",
+      "movimento": 3,
+      "habitat": "Mar, perto do litoral",
+      "numero": "1",
+      "resistencia": 20,
+      "defesaPassiva": 0,
+      "defesaAtiva": 1,
+      "habilidades": [
+        {
+          "nome": "Fôlego",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Dano",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Tempo",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Contra magia",
+          "nivel": 3,
+          "notas": ""
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Golpear",
+          "nivel": 1,
+          "dano": 4,
+          "alcance": "Corpo a corpo",
+          "efeito": "Dano varia conforme o tamanho atual da criatura."
+        }
+      ],
+      "especial": "Cresce a cada rodada até atingir tamanho e força máximos; antes do tamanho J costuma usar poderes, depois entra em furor e usa Golpear.",
+      "descricao": "Bruxa marinha que aparece nas praias à noite em busca de pessoas desprevenidas. Se sofrer dano superior à metade da resistência antes da terceira rodada, foge para o fundo do mar."
+    }
+  },
+  {
+    "name": "Bicho-Papão",
+    "system": {
+      "tamanho": "L",
+      "movimento": 2,
+      "habitat": "Todo o território",
+      "numero": "1 a 2",
+      "resistencia": 60,
+      "defesaPassiva": 3,
+      "defesaAtiva": 4,
+      "habilidades": [
+        {
+          "nome": "Amedrontar",
+          "nivel": 2,
+          "notas": "Assume a forma do pior pesadelo de uma pessoa ou criatura na batalha."
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Golpear",
+          "nivel": 1,
+          "dano": 8,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Só sai à noite; costuma fugir apenas se ficar gravemente ferido.",
+      "descricao": "Criatura enorme e teimosa, parecida com um ogro de corpo indefinido."
+    }
+  },
+  {
+    "name": "Boitatá",
+    "system": {
+      "tamanho": "J",
+      "movimento": 3,
+      "habitat": "Águas, rios e matas alagadas",
+      "numero": "1 a 2",
+      "resistencia": 25,
+      "defesaPassiva": 3,
+      "defesaAtiva": 4,
+      "habilidades": [
+        {
+          "nome": "Enlouquecer",
+          "nivel": 2,
+          "notas": "Pode afetar até dois inimigos ao mesmo tempo."
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 2,
+          "dano": 4,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "O fogo azulado causa 1 ponto de dano automático por rodada a quem estiver em combate com a criatura; foge pela água ao perder metade da resistência.",
+      "descricao": "Serpente enorme de olhos flamejantes. Passa boa parte do tempo na água e, ao sair, seu corpo emite fogo azulado que queima carne, mas não plantas."
+    }
+  },
+  {
+    "name": "Boitatá Enorme",
+    "system": {
+      "tamanho": "N",
+      "movimento": 3,
+      "habitat": "Águas, rios e matas alagadas",
+      "numero": "1",
+      "resistencia": 150,
+      "defesaPassiva": 3,
+      "defesaAtiva": 4,
+      "habilidades": [
+        {
+          "nome": "Enlouquecer",
+          "nivel": 2,
+          "notas": "Pode afetar até dois inimigos ao mesmo tempo."
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 2,
+          "dano": 15,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "A versóo monstruosa do Boitatá; seu fogo causa 1 ponto de dano automático por rodada.",
+      "descricao": "Serpente colossal e quase impossível de derrotar em combate direto. Costuma fugir pela água quando gravemente ferida."
+    }
+  },
+  {
+    "name": "Boitatá Grande",
+    "system": {
+      "tamanho": "L",
+      "movimento": 3,
+      "habitat": "Águas, rios e matas alagadas",
+      "numero": "1",
+      "resistencia": 50,
+      "defesaPassiva": 3,
+      "defesaAtiva": 4,
+      "habilidades": [
+        {
+          "nome": "Enlouquecer",
+          "nivel": 2,
+          "notas": "Pode afetar até dois inimigos ao mesmo tempo."
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 2,
+          "dano": 7,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Versão maior do Boitatá; causa 1 ponto de dano automático por rodada a quem estiver em combate com ele.",
+      "descricao": "Um Boitatá de tamanho extraordinário, usado para encontros mais perigosos ou como ameaça lendária em regiões alagadas."
+    }
+  },
+  {
+    "name": "Cabra Cabriola",
+    "system": {
+      "tamanho": "H",
+      "movimento": 3,
+      "habitat": "Campos e cerrados perto de habitações humanas",
+      "numero": "1 a 4",
+      "resistencia": 12,
+      "defesaPassiva": 0,
+      "defesaAtiva": 2,
+      "habilidades": [
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 1,
+          "dano": 4,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        },
+        {
+          "nome": "Escoicear",
+          "nivel": 2,
+          "dano": 2,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        },
+        {
+          "nome": "Dar chifrada",
+          "nivel": 2,
+          "dano": 2,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Consegue falar, raciocinar e imitar vozes humanas para atrair vítimas.",
+      "descricao": "Cabra monstruosa e carnívora, com focinho estranho e fogo nos olhos, narinas e boca quando enfurecida."
+    }
+  },
+  {
+    "name": "Caipora",
+    "system": {
+      "tamanho": "I",
+      "movimento": 3,
+      "habitat": "Matas",
+      "numero": "1 a 4",
+      "resistencia": 18,
+      "defesaPassiva": 1,
+      "defesaAtiva": 3,
+      "habilidades": [
+        {
+          "nome": "Rastreamento",
+          "nivel": 2,
+          "notas": ""
+        },
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Lança pesada",
+          "nivel": 2,
+          "dano": 4,
+          "alcance": "Corpo a corpo ou arremesso",
+          "efeito": "Armas de haste ou Armas de arremesso."
+        }
+      ],
+      "especial": "Geralmente possui um Caititu Gigante como montaria; lança pesada demais para humanos.",
+      "descricao": "Homem grande coberto de pelos escuros, protetor agressivo da floresta."
+    }
+  },
+  {
+    "name": "Capelobo",
+    "system": {
+      "tamanho": "I",
+      "movimento": 3,
+      "habitat": "Mata",
+      "numero": "1 a 2",
+      "resistencia": 18,
+      "defesaPassiva": 3,
+      "defesaAtiva": 3,
+      "habilidades": [
+        {
+          "nome": "Atordoar",
+          "nivel": 2,
+          "notas": "Usa o grito contra todos ao redor; pode repetir a cada duas rodadas."
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Arranhar",
+          "nivel": 2,
+          "dano": 3,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        },
+        {
+          "nome": "Chutar",
+          "nivel": 1,
+          "dano": 4,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Imune a todas as armas, inclusive encantadas; seu único ponto fraco é o umbigo, atingido apenas com façanha lendária por arma perfurante ou projétil.",
+      "descricao": "Bípede enorme com cabeça bizarra, focinho de tamanduá, garras longas e cascos de touro. Usa o grito para atordoar antes de atacar."
+    }
+  },
+  {
+    "name": "Carneiro Encantado",
+    "system": {
+      "tamanho": "K",
+      "movimento": 0,
+      "habitat": "Todo o território",
+      "numero": "1",
+      "resistencia": 1,
+      "defesaPassiva": 0,
+      "defesaAtiva": 0,
+      "habilidades": [],
+      "ataques": [],
+      "especial": "Aparição; desaparece se alguém atirar nele ou tentar se aproximar. Indica que há riqueza por perto.",
+      "descricao": "Carneiro dourado com uma estrela de diamantes na testa, sempre visto de longe e imóvel, olhando fixamente para o grupo."
+    }
+  },
+  {
+    "name": "Cavalo de Três Pés",
+    "system": {
+      "tamanho": "K",
+      "movimento": 5,
+      "habitat": "Todo o território",
+      "numero": "1 a 4",
+      "resistencia": 35,
+      "defesaPassiva": 0,
+      "defesaAtiva": 1,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Escoicear",
+          "nivel": 2,
+          "dano": 5,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        },
+        {
+          "nome": "Chutar",
+          "nivel": 1,
+          "dano": 4,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Voa; movimento 4 voando.",
+      "descricao": "Equino voador sem cabeça, com asas longas e apenas três pernas."
+    }
+  },
+  {
+    "name": "Chibamba",
+    "system": {
+      "tamanho": "H",
+      "movimento": 3,
+      "habitat": "Campos e cerrados perto de assentamentos humanos",
+      "numero": "1",
+      "resistencia": 12,
+      "defesaPassiva": 1,
+      "defesaAtiva": 4,
+      "habilidades": [
+        {
+          "nome": "Amedrontar",
+          "nivel": 1,
+          "notas": "Pode usar em uma pessoa por rodada ao olhar para ela."
+        },
+        {
+          "nome": "Força física",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Quicongo",
+          "nivel": 1,
+          "notas": ""
+        },
+        {
+          "nome": "Quimbundo",
+          "nivel": 1,
+          "notas": ""
+        },
+        {
+          "nome": "Capoeira",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Dança",
+          "nivel": 2,
+          "notas": ""
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Capoeira",
+          "nivel": 3,
+          "dano": 1,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Amigável com quem fala quicongo ou quimbundo; hostil a escravizadores.",
+      "descricao": "Ser encantado africano, alto e musculoso, coberto por folhas de bananeira."
+    }
+  },
+  {
+    "name": "Cobras Gêmeas",
+    "system": {
+      "tamanho": "H/J",
+      "movimento": 4,
+      "habitat": "Rios",
+      "numero": "1 (criaturas únicas)",
+      "resistencia": 25,
+      "defesaPassiva": 1,
+      "defesaAtiva": 4,
+      "habilidades": [
+        {
+          "nome": "Natação",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Prestidigitação",
+          "nivel": 1,
+          "notas": ""
+        },
+        {
+          "nome": "Armadilhas",
+          "nivel": 2,
+          "notas": ""
+        },
+        {
+          "nome": "Medicina natural",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Rastreamento",
+          "nivel": 2,
+          "notas": ""
+        },
+        {
+          "nome": "Fôlego",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Controle da natureza",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Contra magia",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        },
+        {
+          "nome": "Cura",
+          "nivel": 3,
+          "notas": "Apenas Cobra Norato."
+        },
+        {
+          "nome": "Dano",
+          "nivel": 3,
+          "notas": "Apenas Maria Caninana."
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 3,
+          "dano": 5,
+          "alcance": "Corpo a corpo",
+          "efeito": "Forma serpente."
+        },
+        {
+          "nome": "Porrete",
+          "nivel": 3,
+          "dano": 2,
+          "alcance": "Corpo a corpo",
+          "efeito": "Forma humana."
+        },
+        {
+          "nome": "Arco e flecha",
+          "nivel": 3,
+          "dano": 1,
+          "alcance": "Longa distância",
+          "efeito": "Forma humana."
+        }
+      ],
+      "especial": "Regenera 4 pontos de dano ao final de cada rodada. Cobra Norato é bondoso; Maria Caninana é malvada.",
+      "descricao": "Cobra Norato e Maria Caninana são serpentes enormes capazes de assumir forma humana atraente. São irmãos e inimigos mortais."
+    }
+  },
+  {
+    "name": "Corpo-Seco",
+    "system": {
+      "tamanho": "G",
+      "movimento": 1,
+      "habitat": "Matas, manguezais",
+      "numero": "1 a 100",
+      "resistencia": 6,
+      "defesaPassiva": 2,
+      "defesaAtiva": 2,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Agarrar",
+          "nivel": 1,
+          "dano": 3,
+          "alcance": "Corpo a corpo",
+          "efeito": "Depois de agarrar, causa 3 pontos de dano por rodada até ser removido."
+        }
+      ],
+      "especial": "Imune a armas normais; só se move à noite.",
+      "descricao": "Morto-vivo de gravetos que suga a vida de suas vítimas."
+    }
+  },
+  {
+    "name": "Cotaluna",
+    "system": {
+      "tamanho": "H",
+      "movimento": 4,
+      "habitat": "Águas litorâneas, rios e lagos",
+      "numero": "1 a 3",
+      "resistencia": 12,
+      "defesaPassiva": 0,
+      "defesaAtiva": 1,
+      "habilidades": [
+        {
+          "nome": "Encantar",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Agarrar",
+          "nivel": 1,
+          "dano": 0,
+          "alcance": "Corpo a corpo",
+          "efeito": "Afogar/submergir vítima; veja descrição."
+        },
+        {
+          "nome": "Arranhar",
+          "nivel": 2,
+          "dano": 2,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Poder de transformação.",
+      "descricao": "Sereia selvagem meio mulher e meio peixe, de cabelos negros longos e unhas compridas."
+    }
+  },
+  {
+    "name": "Cuca",
+    "system": {
+      "tamanho": "H",
+      "movimento": 3,
+      "habitat": "Cavernas ou casas afastadas",
+      "numero": "1 (única)",
+      "resistencia": 12,
+      "defesaPassiva": 0,
+      "defesaAtiva": 0,
+      "habilidades": [
+        {
+          "nome": "Fôlego",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Dano",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Fraqueza",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Morte",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Mundo espiritual",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Controle da natureza",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Contra magia",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        },
+        {
+          "nome": "Português",
+          "nivel": 2,
+          "notas": ""
+        },
+        {
+          "nome": "Latim",
+          "nivel": 2,
+          "notas": ""
+        }
+      ],
+      "ataques": [],
+      "especial": "Bruxa lendária; sua morada costuma ter armadilhas mágicas e guardiões.",
+      "descricao": "Uma das bruxas mais poderosas e temidas. Parece uma idosa encapuzada, ocultando feições monstruosas e pernas de inseto."
+    }
+  },
+  {
+    "name": "Cumacanga",
+    "system": {
+      "tamanho": "G",
+      "movimento": 4,
+      "habitat": "Todo o território",
+      "numero": "1",
+      "resistencia": 14,
+      "defesaPassiva": 4,
+      "defesaAtiva": 5,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 2,
+          "dano": 5,
+          "alcance": "Corpo a corpo",
+          "efeito": "Queima e corta a vítima."
+        }
+      ],
+      "especial": "Resistência: sofre apenas meio dano de todos os ataques, arredondado para baixo, mínimo 1.",
+      "descricao": "Crânio flamejante de uma pessoa malvada que separa a cabeça do corpo durante a noite."
+    }
+  },
+  {
+    "name": "Curupira",
+    "system": {
+      "tamanho": "H",
+      "movimento": 3,
+      "habitat": "Matas",
+      "numero": "1 (criatura única)",
+      "resistencia": 15,
+      "defesaPassiva": 0,
+      "defesaAtiva": 3,
+      "habilidades": [
+        {
+          "nome": "Acrobacia",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Corrida",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Escalada",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Força física",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Natação",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Prestidigitação",
+          "nivel": 2,
+          "notas": ""
+        },
+        {
+          "nome": "Resistência",
+          "nivel": 2,
+          "notas": ""
+        },
+        {
+          "nome": "Armadilhas",
+          "nivel": 2,
+          "notas": ""
+        },
+        {
+          "nome": "Canoagem",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Comida silvestre",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Folclore",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Medicina natural",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Navegação terrestre",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Rastreamento",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Armas de arremesso",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Armas de haste",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Arqueria",
+          "nivel": 2,
+          "notas": ""
+        },
+        {
+          "nome": "Luta livre",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        },
+        {
+          "nome": "Português",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Lança encantada",
+          "nivel": 3,
+          "dano": 3,
+          "alcance": "Corpo a corpo ou média distância",
+          "efeito": "Bônus especial +3 na resolução do ataque."
+        },
+        {
+          "nome": "Palavra de força",
+          "nivel": 3,
+          "dano": 2,
+          "alcance": "Curta distância",
+          "efeito": "A cada duas rodadas, derruba inimigos de tamanho K ou menor e faz perder a ação."
+        }
+      ],
+      "especial": "Comando sobre animais, cura, palavra de força e imortalidade; renasce na próxima lua nova se for morto.",
+      "descricao": "Caipora lendário, defensor da floresta, com pés voltados para três e cabelos ruivos. Costuma agir em defesa dos animais e da mata."
+    }
+  },
+  {
+    "name": "Guajara",
+    "system": {
+      "tamanho": "F",
+      "movimento": 3,
+      "habitat": "Manguezais",
+      "numero": "1",
+      "resistencia": 5,
+      "defesaPassiva": 0,
+      "defesaAtiva": 2,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Chicotear",
+          "nivel": 2,
+          "dano": 2,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Invisibilidade e transformação.",
+      "descricao": "Duende invisível que imita sons e evita combate com humanos."
+    }
+  },
+  {
+    "name": "Guanambi-Guaçu",
+    "system": {
+      "tamanho": "A",
+      "movimento": 10,
+      "habitat": "Todo o território",
+      "numero": "1",
+      "resistencia": 5,
+      "defesaPassiva": 10,
+      "defesaAtiva": 10,
+      "habilidades": [
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [],
+      "especial": "Velocidade cegante, viagem espiritual, imune a armas normais e a poderes sobrenaturais. Em fracasso contra ela, há chance de acertar aliado ou a si próprio.",
+      "descricao": "Rainha dos beija-flores e criatura mais rápida do mundo. Viaja a velocidade incrível e entra e sai do mundo espiritual à vontade."
+    }
+  },
+  {
+    "name": "Iara",
+    "system": {
+      "tamanho": "H",
+      "movimento": 4,
+      "habitat": "Águas litorâneas, rios e lagos",
+      "numero": "1 (lendária)",
+      "resistencia": 16,
+      "defesaPassiva": 1,
+      "defesaAtiva": 3,
+      "habilidades": [
+        {
+          "nome": "Encantar",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Vocal",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Dano",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Fraqueza",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Morte",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Controle da natureza",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Contra magia",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Português",
+          "nivel": 1,
+          "notas": ""
+        },
+        {
+          "nome": "Espanhol",
+          "nivel": 1,
+          "notas": ""
+        },
+        {
+          "nome": "Latim",
+          "nivel": 1,
+          "notas": ""
+        },
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Forma monstruosa",
+          "nivel": 3,
+          "dano": 5,
+          "alcance": "Corpo a corpo",
+          "efeito": "Agarrar e morder em forma de monstro aquático."
+        }
+      ],
+      "especial": "Uso ilimitado de poderes de Fôlego; transforma-se em monstro aquático, peixe ou outros animais pequenos.",
+      "descricao": "Sereia lendária, antiga e poderosa. Vive próxima da água e usa encantos, poderes mágicos e transformações para controlar seus domínios."
+    }
+  },
+  {
+    "name": "Ipupiara",
+    "system": {
+      "tamanho": "J a K",
+      "movimento": 3,
+      "habitat": "Águas litorâneas, rios e lagos",
+      "numero": "1",
+      "resistencia": 25,
+      "defesaPassiva": 4,
+      "defesaAtiva": 5,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Agarrar e morder",
+          "nivel": 2,
+          "dano": 4,
+          "alcance": "Corpo a corpo",
+          "efeito": "Tamanho J."
+        },
+        {
+          "nome": "Agarrar e morder",
+          "nivel": 2,
+          "dano": 6,
+          "alcance": "Corpo a corpo",
+          "efeito": "Tamanho K."
+        }
+      ],
+      "especial": "Ataca de surpresa e normalmente ganha uma rodada de ataque antes da vítima agir; arrasta presas incapacitadas para baixo da água.",
+      "descricao": "Monstro aquático com braços de garras enormes e longa cauda de peixe, predador de nadadores e pescadores."
+    }
+  },
+  {
+    "name": "Jabuti-Guaçu",
+    "system": {
+      "tamanho": "H",
+      "movimento": 2,
+      "habitat": "Lagos",
+      "numero": "1",
+      "resistencia": 20,
+      "defesaPassiva": 7,
+      "defesaAtiva": 8,
+      "habilidades": [
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 3,
+          "dano": 4,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Imune a armas normais, graças divinas e poderes de fôlego.",
+      "descricao": "Rei dos jabutis, sábio e antigo. Nunca se afasta muito de seu lago e foge por baixo da água em caso de perigo."
+    }
+  },
+  {
+    "name": "Jaguarairuçu",
+    "system": {
+      "tamanho": "E",
+      "movimento": 6,
+      "habitat": "Cerrados ou matas",
+      "numero": "1",
+      "resistencia": 10,
+      "defesaPassiva": 3,
+      "defesaAtiva": 6,
+      "habilidades": [
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 3,
+          "dano": 3,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Imune a armas normais.",
+      "descricao": "Rainha dos guaraxains, animal esperto e brincalhão que leva a sério os problemas de seus súditos."
+    }
+  },
+  {
+    "name": "Jaraguá",
+    "system": {
+      "tamanho": "I",
+      "movimento": 2,
+      "habitat": "Manguezais e pântanos",
+      "numero": "1 a 5",
+      "resistencia": 16,
+      "defesaPassiva": 3,
+      "defesaAtiva": 5,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 2,
+          "dano": 3,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Amedrontar 1 ao ser visto.",
+      "descricao": "Criatura de corpo alongado e cabeça em formato de crânio de cavalo."
+    }
+  },
+  {
+    "name": "Labatut",
+    "system": {
+      "tamanho": "H",
+      "movimento": 4,
+      "habitat": "Perto de assentamentos",
+      "numero": "1",
+      "resistencia": 15,
+      "defesaPassiva": 2,
+      "defesaAtiva": 4,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Agarrar e morder",
+          "nivel": 2,
+          "dano": 3,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        },
+        {
+          "nome": "Golpear",
+          "nivel": 2,
+          "dano": 2,
+          "alcance": "Corpo a corpo",
+          "efeito": "Ao acertar, aplicar Envenenar 2: veneno incomum."
+        }
+      ],
+      "especial": "Espinhos e veneno incomum.",
+      "descricao": "Monstro de um olho só, musculoso, com pelos duros como espinhos."
+    }
+  },
+  {
+    "name": "Lobisomem",
+    "system": {
+      "tamanho": "H",
+      "movimento": 4,
+      "habitat": "Todo o território",
+      "numero": "1 a 4",
+      "resistencia": 14,
+      "defesaPassiva": 1,
+      "defesaAtiva": 3,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 2,
+          "dano": 3,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        },
+        {
+          "nome": "Arranhar",
+          "nivel": 2,
+          "dano": 3,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Imune a armas não-encantadas.",
+      "descricao": "Forma bestial amaldiçoada que ataca com mordidas e garras."
+    }
+  },
+  {
+    "name": "Mapinguari",
+    "system": {
+      "tamanho": "J",
+      "movimento": 4,
+      "habitat": "Matas e manguezais",
+      "numero": "1 ou 2",
+      "resistencia": 25,
+      "defesaPassiva": 3,
+      "defesaAtiva": 5,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 2,
+          "dano": 6,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        },
+        {
+          "nome": "Golpear",
+          "nivel": 2,
+          "dano": 5,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Pele invulnerável; só pode ser ferido dentro da boca por ataques frontais. Costuma fugir após sofrer mais de 10 pontos de dano.",
+      "descricao": "Criatura peluda, larga e musculosa, com boca enorme cheia de dentes no meio do peito. Poucos sobrevivem à sua mordida."
+    }
+  },
+  {
+    "name": "Maritataca-Guaçu e Jaritataca-Guaçu",
+    "system": {
+      "tamanho": "E",
+      "movimento": 3,
+      "habitat": "Lagos",
+      "numero": "2",
+      "resistencia": 8,
+      "defesaPassiva": 3,
+      "defesaAtiva": 6,
+      "habilidades": [
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 2,
+          "dano": 3,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Defesa fétida e imunidade a armas normais; o fedor causa 2 pontos de dano e impede ações por seis rodadas em criaturas com olfato no raio.",
+      "descricao": "Rainha e rei das jaritatacas, inseparáveis. Quase todas as criaturas os evitam por causa de sua defesa fétida."
+    }
+  },
+  {
+    "name": "Matinta Perera",
+    "system": {
+      "tamanho": "H",
+      "movimento": 3,
+      "habitat": "Todo o território",
+      "numero": "1",
+      "resistencia": 10,
+      "defesaPassiva": 0,
+      "defesaAtiva": 3,
+      "habilidades": [
+        {
+          "nome": "Dano",
+          "nivel": 3,
+          "notas": "Uso ilimitado."
+        },
+        {
+          "nome": "Fraqueza",
+          "nivel": 3,
+          "notas": "Uso ilimitado."
+        },
+        {
+          "nome": "Morte",
+          "nivel": 3,
+          "notas": "Uso ilimitado."
+        }
+      ],
+      "ataques": [],
+      "especial": "Transformação; uso ilimitado dos poderes de Fôlego Dano, Fraqueza e Morte.",
+      "descricao": "Ser entre forma humana idosa e ave de mau agouro."
+    }
+  },
+  {
+    "name": "Maçone",
+    "system": {
+      "tamanho": "G",
+      "movimento": 5,
+      "habitat": "Todo o território",
+      "numero": "1 a 10",
+      "resistencia": 8,
+      "defesaPassiva": 6,
+      "defesaAtiva": 8,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 2,
+          "dano": 2,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Placas de bronze oferecem defesa poderosa; olhos brilham com chamas azuis.",
+      "descricao": "Lobo revestido por placas de bronze, com pernas que dobram em direções estranhas. Pode viver sozinho ou em matilhas."
+    }
+  },
+  {
+    "name": "Mingusoto",
+    "system": {
+      "tamanho": "I",
+      "movimento": 2,
+      "habitat": "Todo o território",
+      "numero": "1",
+      "resistencia": 15,
+      "defesaPassiva": 3,
+      "defesaAtiva": 5,
+      "habilidades": [
+        {
+          "nome": "Amedrontar",
+          "nivel": 1,
+          "notas": "Pode usar uma vez por combate contra todos os inimigos ao mesmo tempo."
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Golpear",
+          "nivel": 2,
+          "dano": 3,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Imune a armas normais e imortal; defesa varia conforme o material do corpo: água, lama, pedra ou metal.",
+      "descricao": "Fantasma poderoso capaz de possuir elementos de terra, água e metal para formar um corpo físico temporário."
+    }
+  },
+  {
+    "name": "Minhocão",
+    "system": {
+      "tamanho": "Q+",
+      "movimento": 2,
+      "habitat": "Subterrâneo",
+      "numero": "1 (criatura única)",
+      "resistencia": 10000,
+      "defesaPassiva": 4,
+      "defesaAtiva": 4,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Engolir",
+          "nivel": 2,
+          "dano": 999,
+          "alcance": "Corpo a corpo",
+          "efeito": "Pode engolir criaturas até tamanho N; não há salvação comum após ser engolido."
+        }
+      ],
+      "especial": "Um dos Treme-Terras; criatura colossal que raramente se importa com seres menores que tamanho O.",
+      "descricao": "Monstro subterrâneo de tamanho inacreditável. Ao passar perto da superfície, causa tremores e pode simplesmente cavar para se afastar."
+    }
+  },
+  {
+    "name": "Motucu",
+    "system": {
+      "tamanho": "G",
+      "movimento": 3,
+      "habitat": "Matas",
+      "numero": "1 a 200",
+      "resistencia": 6,
+      "defesaPassiva": 0,
+      "defesaAtiva": 1,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Lança",
+          "nivel": 1,
+          "dano": 1,
+          "alcance": "Corpo a corpo",
+          "efeito": "Armas de haste."
+        },
+        {
+          "nome": "Zarabatana",
+          "nivel": 1,
+          "dano": 1,
+          "alcance": "Média distância",
+          "efeito": "Armas de sopro."
+        }
+      ],
+      "especial": "Costumam aparecer em grande número.",
+      "descricao": "Criatura pequena das matas, perigosa principalmente em grupos."
+    }
+  },
+  {
+    "name": "Mula-sem-Cabeça",
+    "system": {
+      "tamanho": "J",
+      "movimento": 6,
+      "habitat": "Todo o território",
+      "numero": "1",
+      "resistencia": 25,
+      "defesaPassiva": 1,
+      "defesaAtiva": 4,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Fogo",
+          "nivel": 3,
+          "dano": 4,
+          "alcance": "Média distância",
+          "efeito": "Precisa de uma rodada entre usos."
+        },
+        {
+          "nome": "Chutar",
+          "nivel": 2,
+          "dano": 3,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        },
+        {
+          "nome": "Escoicear",
+          "nivel": 3,
+          "dano": 5,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Amaldiçoada; pode ter o encantamento quebrado por rosário, sangue com arma encantada, Dissipar magia ou Contrafeitiço.",
+      "descricao": "Pessoa amaldiçoada transformada em criatura que cospe fogo pelo pescoço. à noite, corre entre cidades ou igrejas e ataca quem cruza seu caminho."
+    }
+  },
+  {
+    "name": "Mulher da Meia-Noite",
+    "system": {
+      "tamanho": "H",
+      "movimento": 2,
+      "habitat": "Perto de assentamentos",
+      "numero": "1",
+      "resistencia": 1,
+      "defesaPassiva": 0,
+      "defesaAtiva": 0,
+      "habilidades": [
+        {
+          "nome": "Encantar",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Enlouquecer",
+          "nivel": 2,
+          "notas": ""
+        }
+      ],
+      "ataques": [],
+      "especial": "Desaparece à meia-noite ou ao receber qualquer golpe físico.",
+      "descricao": "Fantasma de uma senhora assassinada. Busca homens solitários à noite, encanta-os e os leva ao lugar onde seu corpo está enterrado."
+    }
+  },
+  {
+    "name": "Mãe-do-Ouro",
+    "system": {
+      "tamanho": "H",
+      "movimento": 3,
+      "habitat": "Cerrados",
+      "numero": "1",
+      "resistencia": 10,
+      "defesaPassiva": 2,
+      "defesaAtiva": 2,
+      "habilidades": [],
+      "ataques": [],
+      "especial": "Imune a armas normais; forma de fogo com movimento 9.",
+      "descricao": "Entidade guardiã de pepitas de ouro; foge ao sentir ameaça."
+    }
+  },
+  {
+    "name": "Mão Pelada",
+    "system": {
+      "tamanho": "I",
+      "movimento": 5,
+      "habitat": "Todo o território",
+      "numero": "1 a 2",
+      "resistencia": 14,
+      "defesaPassiva": 1,
+      "defesaAtiva": 3,
+      "habilidades": [
+        {
+          "nome": "Amedrontar",
+          "nivel": 1,
+          "notas": "Uivo poderoso na primeira rodada contra todos os inimigos."
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 2,
+          "dano": 3,
+          "alcance": "Corpo a corpo",
+          "efeito": "Maldoso: Causar doença 2 (doença comum)."
+        }
+      ],
+      "especial": "Pode ser bondoso ou maldoso; difícil distinguir sem interação.",
+      "descricao": "Criatura semelhante a um lobo-guará grande e musculoso, com patas sem pelo."
+    }
+  },
+  {
+    "name": "Onça Maneta",
+    "system": {
+      "tamanho": "J",
+      "movimento": 7,
+      "habitat": "Todo o território",
+      "numero": "1",
+      "resistencia": 30,
+      "defesaPassiva": 3,
+      "defesaAtiva": 5,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 2,
+          "dano": 5,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        },
+        {
+          "nome": "Arranhar",
+          "nivel": 3,
+          "dano": 4,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Nunca desiste de uma batalha; luta até a morte.",
+      "descricao": "Onça sobrenatural curada por protetores da floresta após perder uma pata. Transformou sua dor em vingança contra seres humanos."
+    }
+  },
+  {
+    "name": "Onça-Pé-de-Boi",
+    "system": {
+      "tamanho": "J",
+      "movimento": 6,
+      "habitat": "Matas e cerrados",
+      "numero": "2",
+      "resistencia": 26,
+      "defesaPassiva": 2,
+      "defesaAtiva": 4,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 2,
+          "dano": 4,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        },
+        {
+          "nome": "Arranhar",
+          "nivel": 3,
+          "dano": 3,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Anda sempre em casal; se um membro do casal morre, o comportamento do outro muda de forma perigosa.",
+      "descricao": "Onça de tamanho incomum, com patas de boi. Caça seres humanos e raramente desiste de uma presa."
+    }
+  },
+  {
+    "name": "Pai do Mato",
+    "system": {
+      "tamanho": "Q",
+      "movimento": 9,
+      "habitat": "Matas",
+      "numero": "1 (criatura única)",
+      "resistencia": 1000,
+      "defesaPassiva": 4,
+      "defesaAtiva": 4,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Pisar",
+          "nivel": 2,
+          "dano": 75,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        },
+        {
+          "nome": "Bater",
+          "nivel": 2,
+          "dano": 50,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        },
+        {
+          "nome": "Arranhar",
+          "nivel": 2,
+          "dano": 25,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Imune a armas normais; seu umbigo é ponto fraco e pode multiplicar dano, mas é extremamente difícil de acertar.",
+      "descricao": "Um dos Treme-Terras, com cerca de 55 metros de altura. Sua forma lembra um ser humano coberto de cascas de árvore e musgo."
+    }
+  },
+  {
+    "name": "Pilão-de-Fogo",
+    "system": {
+      "tamanho": "J",
+      "movimento": 3,
+      "habitat": "Estradas e trilhas",
+      "numero": "1",
+      "resistencia": 25,
+      "defesaPassiva": 5,
+      "defesaAtiva": 5,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Atropelar",
+          "nivel": 2,
+          "dano": 6,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Imune a armas normais; pode perder interesse no combate ao final de cada rodada.",
+      "descricao": "Grande pilão mágico coberto de chamas que vaga por estradas e trilhas, atacando viajantes ao acaso."
+    }
+  },
+  {
+    "name": "Porco-Preto",
+    "system": {
+      "tamanho": "J",
+      "movimento": 2,
+      "habitat": "Perto de assentamentos",
+      "numero": "1",
+      "resistencia": 20,
+      "defesaPassiva": 3,
+      "defesaAtiva": 5,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 2,
+          "dano": 4,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Imune a armas normais; tenta fugir quando encontra um grupo capaz de feri-lo.",
+      "descricao": "Enorme porco escuro que vive perto de assentamentos, emboscando pessoas e animais."
+    }
+  },
+  {
+    "name": "Quibungo",
+    "system": {
+      "tamanho": "J",
+      "movimento": 3,
+      "habitat": "Todo o território",
+      "numero": "1 a 2",
+      "resistencia": 20,
+      "defesaPassiva": 0,
+      "defesaAtiva": 2,
+      "habilidades": [
+        {
+          "nome": "Ifá",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Saúde",
+          "nivel": 2,
+          "notas": ""
+        },
+        {
+          "nome": "Influência",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Energia negativa",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        },
+        {
+          "nome": "Quicongo",
+          "nivel": 1,
+          "notas": ""
+        },
+        {
+          "nome": "Armas de golpe",
+          "nivel": 2,
+          "notas": ""
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Arma enorme",
+          "nivel": 2,
+          "dano": 5,
+          "alcance": "Corpo a corpo",
+          "efeito": "Machado ou martelo de tamanho enorme."
+        },
+        {
+          "nome": "Morder em forma de lobo",
+          "nivel": 2,
+          "dano": 6,
+          "alcance": "Corpo a corpo",
+          "efeito": "Usado após transformação em lobo; movimento 5."
+        }
+      ],
+      "especial": "Transforma-se em enorme lobo; na forma de lobo perde magia e armas, mas ganha movimento e mordida.",
+      "descricao": "Feiticeiro gigante e musculoso de origem africana, capaz de unir armas, poderes de Ifá e transformação."
+    }
+  },
+  {
+    "name": "Romãozinho",
+    "system": {
+      "tamanho": "G",
+      "movimento": 3,
+      "habitat": "Todo o território",
+      "numero": "1",
+      "resistencia": 7,
+      "defesaPassiva": 0,
+      "defesaAtiva": 2,
+      "habilidades": [
+        {
+          "nome": "Prestidigitação",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        },
+        {
+          "nome": "Português",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [],
+      "especial": "Saci lendário malicioso; pode transformar-se em chama azul para escapar de perigo.",
+      "descricao": "Parece uma criança negra normal, mas com ar mais velho e uma maldade sem limites. Rouba, estraga objetos e prepara armadilhas."
+    }
+  },
+  {
+    "name": "Saci",
+    "system": {
+      "tamanho": "G",
+      "movimento": 3,
+      "habitat": "Todo o território",
+      "numero": "1",
+      "resistencia": 7,
+      "defesaPassiva": 0,
+      "defesaAtiva": 2,
+      "habilidades": [
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        },
+        {
+          "nome": "Português",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [],
+      "especial": "Mestre de camuflagem; normalmente invisível até se apresentar. Não consegue atravessar água corrente.",
+      "descricao": "Criança mágica e única, frequentemente capaz de se transformar em ave ou redemoinho e usar poderes mágicos variáveis."
+    }
+  },
+  {
+    "name": "Saci-Pererê",
+    "system": {
+      "tamanho": "G",
+      "movimento": 3,
+      "habitat": "Todo o território",
+      "numero": "1",
+      "resistencia": 7,
+      "defesaPassiva": 0,
+      "defesaAtiva": 2,
+      "habilidades": [
+        {
+          "nome": "Prestidigitação",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        },
+        {
+          "nome": "Português",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [],
+      "especial": "Teletransporta-se a curtas distâncias; sua carapuça vermelha é fonte de seus poderes.",
+      "descricao": "Menino negro de uma perna só, brincalhão e viciado em tabaco. Incomoda viajantes, mas raramente causa dano sório."
+    }
+  },
+  {
+    "name": "Sereia",
+    "system": {
+      "tamanho": "H",
+      "movimento": 4,
+      "habitat": "Águas litorâneas, rios e lagos",
+      "numero": "1 a 3",
+      "resistencia": 11,
+      "defesaPassiva": 0,
+      "defesaAtiva": 2,
+      "habilidades": [
+        {
+          "nome": "Encantar",
+          "nivel": 2,
+          "notas": "Usado através da voz."
+        },
+        {
+          "nome": "Vocal",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Português",
+          "nivel": 1,
+          "notas": ""
+        },
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [],
+      "especial": "Pode transformar-se em humana; Encantar pode afetar mulheres com penalidade de -3.",
+      "descricao": "Ser de beleza sedutora, com cauda de peixe e voz encantadora. Atrai pessoas para a água, onde acabam se afogando."
+    }
+  },
+  {
+    "name": "Sigidi",
+    "system": {
+      "tamanho": "G",
+      "movimento": 2,
+      "habitat": "Criado por magia",
+      "numero": "1",
+      "resistencia": 6,
+      "defesaPassiva": 5,
+      "defesaAtiva": 6,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Faca",
+          "nivel": 1,
+          "dano": 1,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Criação de argila animada pelo poder Criar Sigidi; luta até a morte quando enviada contra alguém.",
+      "descricao": "Pequena criatura de argila, Ágil e resistente, quase sempre enviada para atacar à noite e surpreender o alvo dormindo."
+    }
+  },
+  {
+    "name": "Taiaçu",
+    "system": {
+      "tamanho": "H",
+      "movimento": 4,
+      "habitat": "Todo o território",
+      "numero": "1",
+      "resistencia": 14,
+      "defesaPassiva": 4,
+      "defesaAtiva": 6,
+      "habilidades": [
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 2,
+          "dano": 3,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Imune a armas normais; anda com pelo menos vinte queixadas normais e leva o bando para a batalha quando enfurecida.",
+      "descricao": "Rainha das queixadas, criatura furiosa que se ofende facilmente e raramente anda sem seu bando."
+    }
+  },
+  {
+    "name": "Tatu-Guaçu",
+    "system": {
+      "tamanho": "H",
+      "movimento": 2,
+      "habitat": "Subterrâneo",
+      "numero": "1",
+      "resistencia": 15,
+      "defesaPassiva": 7,
+      "defesaAtiva": 9,
+      "habilidades": [
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Morder",
+          "nivel": 2,
+          "dano": 3,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Imune a armas normais; cava buracos com velocidade incrível e foge facilmente de encontros arriscados.",
+      "descricao": "Rei dos tatus, generoso com outros seres, mas sempre colocando o bem de seus súditos em primeiro lugar."
+    }
+  },
+  {
+    "name": "Uakti",
+    "system": {
+      "tamanho": "H",
+      "movimento": 3,
+      "habitat": "Todo o território",
+      "numero": "1",
+      "resistencia": 12,
+      "defesaPassiva": 4,
+      "defesaAtiva": 6,
+      "habilidades": [
+        {
+          "nome": "Encantar",
+          "nivel": 2,
+          "notas": "A música criada pelo vento em seu corpo encanta mulheres que a ouvem."
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Porrete",
+          "nivel": 2,
+          "dano": 2,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Corpo duro como madeira e cheio de buracos; tenta evitar combate sempre que possível.",
+      "descricao": "Criatura em forma de indígena com corpo perfurado. O vento que passa pelos buracos produz música quase irresistível."
+    }
+  },
+  {
+    "name": "Uruaçu",
+    "system": {
+      "tamanho": "F",
+      "movimento": 9,
+      "habitat": "Todo o território",
+      "numero": "1",
+      "resistencia": 15,
+      "defesaPassiva": 3,
+      "defesaAtiva": 6,
+      "habilidades": [
+        {
+          "nome": "Tupi",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Arranhar",
+          "nivel": 3,
+          "dano": 4,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Imune a armas normais, graças divinas e poderes de fôlego.",
+      "descricao": "Rei dos urubus, ave enorme com envergadura de quase cinco varas. Age pensando em vantagem própria e raramente se expõe sem motivo."
+    }
+  },
+  {
+    "name": "Velho Bruxo",
+    "system": {
+      "tamanho": "H",
+      "movimento": 3,
+      "habitat": "Cavernas ou casas afastadas",
+      "numero": "1 a 3",
+      "resistencia": 10,
+      "defesaPassiva": 0,
+      "defesaAtiva": 0,
+      "habilidades": [
+        {
+          "nome": "Fôlego",
+          "nivel": 2,
+          "notas": ""
+        },
+        {
+          "nome": "Dano",
+          "nivel": 2,
+          "notas": ""
+        },
+        {
+          "nome": "Fraqueza",
+          "nivel": 2,
+          "notas": ""
+        },
+        {
+          "nome": "Morte",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [],
+      "especial": "Habilidades e poderes variam; costumam possuir poções, itens encantados e armadilhas.",
+      "descricao": "Criatura semi-humana maligna com poderes mágicos, geralmente encapuzada para esconder traços animais ou monstruosos."
+    }
+  },
+  {
+    "name": "Visagem",
+    "system": {
+      "tamanho": "H",
+      "movimento": 2,
+      "habitat": "Todo o território",
+      "numero": "1 a 10",
+      "resistencia": 10,
+      "defesaPassiva": 0,
+      "defesaAtiva": 1,
+      "habilidades": [
+        {
+          "nome": "Amedrontar",
+          "nivel": 1,
+          "notas": ""
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Golpear",
+          "nivel": 1,
+          "dano": 2,
+          "alcance": "Corpo a corpo",
+          "efeito": "Aplica Paralisar 1; paralisação dura três rodadas ou até ser removida."
+        }
+      ],
+      "especial": "Imune a armas normais; dissolve-se ao sofrer dano suficiente por armas encantadas ou poderes mágicos.",
+      "descricao": "Fantasma incorpóreo de forma vagamente humana. Seu toque cria sensação de congelamento e pode paralisar."
+    }
+  },
+  {
+    "name": "Visagem-Feiticeira",
+    "system": {
+      "tamanho": "H",
+      "movimento": 3,
+      "habitat": "Todo o território",
+      "numero": "1",
+      "resistencia": 15,
+      "defesaPassiva": 2,
+      "defesaAtiva": 3,
+      "habilidades": [
+        {
+          "nome": "Amedrontar",
+          "nivel": 2,
+          "notas": ""
+        },
+        {
+          "nome": "Dano",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Fraqueza",
+          "nivel": 3,
+          "notas": ""
+        },
+        {
+          "nome": "Morte",
+          "nivel": 3,
+          "notas": ""
+        }
+      ],
+      "ataques": [
+        {
+          "nome": "Golpear",
+          "nivel": 2,
+          "dano": 3,
+          "alcance": "Corpo a corpo",
+          "efeito": "Aplica Paralisar 2."
+        }
+      ],
+      "especial": "Imune a armas normais; não há limite de uso dos seus poderes de Fôlego.",
+      "descricao": "Fantasma de um poderoso feiticeiro, capaz de comandar Visagens comuns enquanto lança magias à distância."
+    }
+  },
+  {
+    "name": "Yasi-Yateré",
+    "system": {
+      "tamanho": "G",
+      "movimento": 3,
+      "habitat": "Todo o território",
+      "numero": "1",
+      "resistencia": 7,
+      "defesaPassiva": 0,
+      "defesaAtiva": 2,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Bastão de ouro",
+          "nivel": 2,
+          "dano": 2,
+          "alcance": "Corpo a corpo",
+          "efeito": ""
+        }
+      ],
+      "especial": "Seu bastão permite flutuar ou tornar-se invisível; assobio mágico atrai crianças.",
+      "descricao": "Duende sequestrador de crianças, loiro e barbudo, viciado em bebidas alcoólicas que podem ser usadas para atraí-lo."
+    }
+  },
+  {
+    "name": "Água-Viva Gigante",
+    "system": {
+      "tamanho": "H",
+      "movimento": 1,
+      "habitat": "Mar",
+      "numero": "1 a 50",
+      "resistencia": 7,
+      "defesaPassiva": 0,
+      "defesaAtiva": 1,
+      "habilidades": [],
+      "ataques": [
+        {
+          "nome": "Queimar",
+          "nivel": 2,
+          "dano": 1,
+          "alcance": "Corpo a corpo",
+          "efeito": "Aplica Envenenar 1 com veneno comum."
+        }
+      ],
+      "especial": "Tentáculos de cerca de vinte varas; não é agressiva, mas perigosa quando ameaçada ou encontrada em colônia.",
+      "descricao": "Água-viva colossal de alto-mar, com corpo de cerca de duas varas de diâmetro e tentáculos capazes de queimar e envenenar."
+    }
+  }
+]

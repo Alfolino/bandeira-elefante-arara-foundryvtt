@@ -1,0 +1,51 @@
+{
+  "Actor": {
+    "personagem": {
+      "idade": "",
+      "caracteristica1": "",
+      "caracteristica2": "",
+      "caracteristica3": "",
+      "historico": "",
+
+      "resistenciaTemporaria": 0,
+      "dano": 0,
+      "danoCritico": 0,
+      "energia": 0,
+      "energiaMaxima": 0,
+      "caminhoFolego": "",
+
+      "protecao": {
+        "capacete": false,
+        "peitoral": false,
+        "escudo": false,
+        "armaDefensiva": "desarmado",
+        "bonusExtra": 0
+      },
+
+      "pontosIniciais": 20,
+      "pontosGanhos": 0,
+      "modoEdicao": false,
+      "dinheiro": 1000,
+
+      "habilidades": [],
+      "armas": [],
+      "poderes": [],
+      "bens": ""
+    },
+    "criatura": {
+      "tamanho": "H",
+      "movimento": 3,
+      "habitat": "",
+      "numero": "1",
+      "descricao": "",
+      "resistencia": 10,
+      "dano": 0,
+      "modoEdicao": false,
+      "defesaPassiva": 0,
+      "defesaAtiva": 0,
+      "habilidades": [],
+      "ataques": [],
+      "especial": ""
+    }
+  }
+}
