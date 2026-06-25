@@ -1886,6 +1886,108 @@ Hooks.once("init", async function () {
     });
   };
 
+  const initiativeFormula = modifier => {
+    const value = numberValue(modifier);
+    if (!value) return "3d6";
+    return `3d6 ${value > 0 ? "+" : "-"} ${Math.abs(value)}`;
+  };
+
+  const askInitiativeModifier = async actorName => {
+    return new Promise(resolve => {
+      let hookId;
+      const close = value => {
+        if (hookId) Hooks.off("renderDialog", hookId);
+        resolve(value);
+      };
+
+      const safeName = foundry.utils.escapeHTML(String(actorName || "Iniciativa"));
+      const dialog = new Dialog({
+        title: `Modificador — ${safeName}`,
+        content: `
+          <div class="bandeira-modifier-dialog">
+            <p>Existe algum bônus ou penalidade para esta iniciativa?</p>
+            <div class="modifier-stepper">
+              <button type="button" data-step="-1">−</button>
+              <input type="number" name="modifier" value="0" step="1">
+              <button type="button" data-step="1">+</button>
+            </div>
+          </div>`,
+        buttons: {
+          roll: {
+            label: '<i class="fa-solid fa-person-running"></i> Rolar',
+            callback: html => close(numberValue(html.find("input[name='modifier']").val()))
+          },
+          cancel: {
+            label: "Cancelar",
+            callback: () => close(null)
+          }
+        },
+        default: "roll",
+        close: () => close(null)
+      });
+
+      hookId = Hooks.on("renderDialog", (app, html) => {
+        if (app !== dialog) return;
+        Hooks.off("renderDialog", hookId);
+        hookId = null;
+        const input = html.find("input[name='modifier']");
+        html.find("[data-step]").on("click", event => {
+          const step = numberValue(event.currentTarget.dataset.step);
+          input.val(numberValue(input.val()) + step);
+        });
+        input.trigger("focus").trigger("select");
+      });
+
+      dialog.render(true);
+    });
+  };
+
+  const patchCombatInitiative = () => {
+    const CombatClass = CONFIG.Combat?.documentClass || (typeof Combat !== "undefined" ? Combat : null);
+    if (!CombatClass?.prototype || CombatClass.prototype._bandeiraInitiativePatched) return;
+
+    const originalRollInitiative = CombatClass.prototype.rollInitiative;
+    CombatClass.prototype._bandeiraInitiativePatched = true;
+    if (CONFIG.Combat?.initiative) {
+      CONFIG.Combat.initiative.formula = "3d6";
+      CONFIG.Combat.initiative.decimals = 0;
+    }
+
+    CombatClass.prototype.rollInitiative = async function(ids, options = {}) {
+      const idList = typeof ids === "string" ? [ids] : Array.from(ids || []);
+      const combatants = idList
+        .map(id => this.combatants.get(id) || this.combatants.find(combatant => combatant.id === id))
+        .filter(Boolean);
+      const usesBandeiraInitiative = combatants.some(combatant =>
+        ["personagem", "criatura"].includes(combatant.actor?.type)
+      );
+
+      if (!usesBandeiraInitiative || options.formula) {
+        return originalRollInitiative.call(this, ids, options);
+      }
+
+      let modifier = 0;
+      if (combatants.length === 1) {
+        modifier = await askInitiativeModifier(combatants[0].name || combatants[0].actor?.name || "Iniciativa");
+        if (modifier === null) return this;
+      }
+
+      const formula = initiativeFormula(modifier);
+      const messageOptions = {
+        ...(options.messageOptions || {}),
+        flavor: options.messageOptions?.flavor || `Iniciativa${modifier ? ` com modificador ${modifier > 0 ? "+" : ""}${modifier}` : ""}.`
+      };
+
+      return originalRollInitiative.call(this, ids, {
+        ...options,
+        formula,
+        messageOptions
+      });
+    };
+  };
+
+  patchCombatInitiative();
+
   const applyDamageToActor = async (actor, amount) => {
     const damage = Math.max(0, numberValue(amount));
     if (!actor || damage <= 0) return false;
