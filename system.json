@@ -2,7 +2,7 @@
   "id": "bandeira-elefante-arara",
   "title": "A Bandeira do Elefante e da Arara",
   "description": "Sistema não oficial para jogar A Bandeira do Elefante e da Arara no Foundry VTT.",
-  "version": "0.2.6",
+  "version": "1.0.0",
   "authors": [
     {
       "name": "Leandro Ferreira"
@@ -20,13 +20,14 @@
     "styles/bandeira.css"
   ],
   "template": "template.json",
+  "background": "systems/bandeira-elefante-arara/assets/bandeira-background.jpg",
   "documentTypes": {
     "Actor": {
       "personagem": {},
       "criatura": {}
     }
   },
-  "primaryTokenAttribute": "",
+  "primaryTokenAttribute": "resources.resistencia",
   "url": "https://github.com/Alfolino/bandeira-elefante-arara-foundryvtt",
   "manifest": "https://raw.githubusercontent.com/Alfolino/bandeira-elefante-arara-foundryvtt/main/system.json",
   "download": "https://github.com/Alfolino/bandeira-elefante-arara-foundryvtt/archive/refs/heads/main.zip",

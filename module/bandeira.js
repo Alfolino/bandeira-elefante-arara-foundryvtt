@@ -93,7 +93,8 @@ const seedCreatureCompendium = async () => {
         prototypeToken: {
           name: creature.name,
           actorLink: false,
-          disposition: -1
+          disposition: -1,
+          displayName: CONST.TOKEN_DISPLAY_MODES?.ALWAYS ?? 50
         },
         system: {
           tamanho: "H",
@@ -125,7 +126,6 @@ const seedCreatureCompendium = async () => {
     await Actor.createDocuments(documents, { pack: pack.collection });
     if (wasLocked && typeof pack.configure === "function") await pack.configure({ locked: true });
 
-    console.log(`${BANDEIRA_ID} | ${documents.length} criatura(s) adicionada(s) ao compêndio.`);
   } catch (error) {
     console.warn(`${BANDEIRA_ID} | Não foi possível popular o compêndio de criaturas.`, error);
   }
@@ -255,8 +255,6 @@ const PODERES_DETALHES = {
 };
 
 Hooks.once("init", async function () {
-  console.log("A Bandeira do Elefante e da Arara | Inicializando");
-
   Handlebars.registerHelper("eq", (a, b) => String(a) === String(b));
 
   Actors.unregisterSheet("core", ActorSheet);
@@ -973,7 +971,12 @@ Hooks.once("init", async function () {
         return ui.notifications.error(`Pontos insuficientes. Este aumento exige ${custoAumento} ponto${custoAumento === 1 ? "" : "s"} de aprendizagem.`);
       }
       habilidade.nivel = nivelNovo;
-      await this.actor.update({ "system.habilidades": habilidades });
+      const update = { "system.habilidades": habilidades };
+      if (this._normalizeName(habilidade.nome) === this._normalizeName(baseAtual)) {
+        const energiaMaximaNova = [0, 5, 10, 20][Math.max(0, Math.min(3, nivelNovo))] || 0;
+        update["system.energia"] = energiaMaximaNova;
+      }
+      await this.actor.update(update);
     }
 
     _effectiveLevel(level) {
@@ -1879,12 +1882,35 @@ Hooks.once("init", async function () {
     foundry.utils.setProperty(changes, "system.resources.energia.max", resources.energia.max);
   };
 
+  const tokenBarsDisplayMode = () => {
+    return CONST.TOKEN_DISPLAY_MODES?.OWNER
+      ?? CONST.TOKEN_DISPLAY_MODES?.ALWAYS
+      ?? 40;
+  };
+
+  const tokenNameDisplayMode = () => {
+    return CONST.TOKEN_DISPLAY_MODES?.ALWAYS ?? 50;
+  };
+
+  const setDefaultTokenResourceBars = changes => {
+    foundry.utils.setProperty(changes, "prototypeToken.displayName", tokenNameDisplayMode());
+    foundry.utils.setProperty(changes, "prototypeToken.displayBars", tokenBarsDisplayMode());
+    foundry.utils.setProperty(changes, "prototypeToken.bar1.attribute", "resources.resistencia");
+    foundry.utils.setProperty(changes, "prototypeToken.bar2.attribute", "resources.energia");
+    foundry.utils.setProperty(changes, `flags.${BANDEIRA_ID}.tokenResourcesConfigured`, true);
+  };
+
   const syncActorResources = async actor => {
     if (!["personagem", "criatura"].includes(actor?.type)) return;
     const update = {};
     setResourceChanges(update, actor.type, actor.system || {});
-    if (!actor.prototypeToken?.bar1?.attribute) foundry.utils.setProperty(update, "prototypeToken.bar1.attribute", "resources.resistencia");
-    if (!actor.prototypeToken?.bar2?.attribute) foundry.utils.setProperty(update, "prototypeToken.bar2.attribute", "resources.energia");
+    if (!actor.getFlag(BANDEIRA_ID, "tokenResourcesConfigured")) {
+      setDefaultTokenResourceBars(update);
+    } else {
+      if (actor.prototypeToken?.displayName !== tokenNameDisplayMode()) foundry.utils.setProperty(update, "prototypeToken.displayName", tokenNameDisplayMode());
+      if (!actor.prototypeToken?.bar1?.attribute) foundry.utils.setProperty(update, "prototypeToken.bar1.attribute", "resources.resistencia");
+      if (!actor.prototypeToken?.bar2?.attribute) foundry.utils.setProperty(update, "prototypeToken.bar2.attribute", "resources.energia");
+    }
     const flattened = foundry.utils.flattenObject(update);
     for (const [path, value] of Object.entries(flattened)) {
       if (foundry.utils.getProperty(actor, path) === value) delete flattened[path];
@@ -2153,10 +2179,13 @@ Hooks.once("init", async function () {
     if (!["personagem", "criatura"].includes(actor?.type)) return;
     const changes = {
       prototypeToken: {
+        displayName: tokenNameDisplayMode(),
+        displayBars: tokenBarsDisplayMode(),
         bar1: { attribute: "resources.resistencia" },
         bar2: { attribute: "resources.energia" }
       }
     };
+    foundry.utils.setProperty(changes, `flags.${BANDEIRA_ID}.tokenResourcesConfigured`, true);
     setResourceChanges(changes, actor.type, actor.system || {});
     actor.updateSource(changes);
   });
@@ -2164,6 +2193,42 @@ Hooks.once("init", async function () {
   Hooks.on("preUpdateActor", (actor, changes) => {
     if (!["personagem", "criatura"].includes(actor?.type)) return;
     const expandedChanges = foundry.utils.expandObject(foundry.utils.deepClone(changes));
+
+    // Detect token bar drag: when resources are set directly, convert back to system fields.
+    const incomingResources = expandedChanges?.system?.resources;
+    if (incomingResources) {
+      const system = actor.system || {};
+
+      // Token dragged resistencia bar → recalculate dano from new value
+      if (incomingResources.resistencia?.value !== undefined) {
+        const novoValor = numberValue(incomingResources.resistencia.value);
+        if (actor.type === "personagem") {
+          const habilidades = asArrayValue(system.habilidades);
+          const bonusResistencia = habilidades.reduce((total, h) => total + resistanceBonusForAbility(h), 0);
+          const resistenciaBase = Math.min(15, 10 + bonusResistencia);
+          const resistenciaTemporaria = Math.max(0, numberValue(system.resistenciaTemporaria));
+          const resistenciaMaxima = resistenciaBase + resistenciaTemporaria;
+          const novoDano = Math.max(0, Math.min(resistenciaMaxima, resistenciaMaxima - novoValor));
+          foundry.utils.setProperty(changes, "system.dano", novoDano);
+          // Remove the raw resource value so preUpdateActor's setResourceChanges will recompute it correctly
+          delete expandedChanges.system.resources.resistencia;
+        } else if (actor.type === "criatura") {
+          const resistenciaMaxima = Math.max(1, numberValue(system.resistencia, 10));
+          const novoDano = Math.max(0, Math.min(Math.ceil(resistenciaMaxima * 1.5), resistenciaMaxima - novoValor));
+          foundry.utils.setProperty(changes, "system.dano", novoDano);
+          delete expandedChanges.system.resources.resistencia;
+        }
+      }
+
+      // Token dragged energia bar → update system.energia directly
+      if (incomingResources.energia?.value !== undefined && actor.type === "personagem") {
+        const energiaMaxima = supernaturalEnergyMaximum(system);
+        const novaEnergia = Math.max(0, Math.min(energiaMaxima, numberValue(incomingResources.energia.value)));
+        foundry.utils.setProperty(changes, "system.energia", novaEnergia);
+        delete expandedChanges.system.resources.energia;
+      }
+    }
+
     const nextSystem = foundry.utils.mergeObject(
       foundry.utils.deepClone(actor.system || {}),
       expandedChanges.system || {},
@@ -2174,6 +2239,64 @@ Hooks.once("init", async function () {
     if (Object.prototype.hasOwnProperty.call(changes, "name")) {
       const nextName = String(changes.name || "").trim();
       if (nextName) foundry.utils.setProperty(changes, "prototypeToken.name", nextName);
+    }
+  });
+
+  // For unlinked tokens (actorLink: false), bar drags update the TokenDocument's delta,
+  // not the base actor. We intercept here and convert resource changes back to system fields.
+  Hooks.on("preUpdateToken", (tokenDocument, changes) => {
+    const actor = tokenDocument.actor;
+    if (!actor || !["personagem", "criatura"].includes(actor.type)) return;
+    if (tokenDocument.actorLink) return; // linked tokens are handled by preUpdateActor
+
+    const expandedChanges = foundry.utils.expandObject(foundry.utils.deepClone(changes));
+    const incomingResources = expandedChanges?.actorData?.system?.resources
+      ?? expandedChanges?.delta?.system?.resources;
+    if (!incomingResources) return;
+
+    const system = actor.system || {};
+    const resourcePath = expandedChanges?.actorData?.system?.resources
+      ? "actorData.system"
+      : "delta.system";
+
+    if (incomingResources.resistencia?.value !== undefined) {
+      const novoValor = numberValue(incomingResources.resistencia.value);
+      if (actor.type === "personagem") {
+        const habilidades = asArrayValue(system.habilidades);
+        const bonusResistencia = habilidades.reduce((total, h) => total + resistanceBonusForAbility(h), 0);
+        const resistenciaBase = Math.min(15, 10 + bonusResistencia);
+        const resistenciaTemporaria = Math.max(0, numberValue(system.resistenciaTemporaria));
+        const resistenciaMaxima = resistenciaBase + resistenciaTemporaria;
+        const novoDano = Math.max(0, Math.min(resistenciaMaxima, resistenciaMaxima - novoValor));
+        foundry.utils.setProperty(changes, `${resourcePath}.dano`, novoDano);
+      } else if (actor.type === "criatura") {
+        const resistenciaMaxima = Math.max(1, numberValue(system.resistencia, 10));
+        const novoDano = Math.max(0, Math.min(Math.ceil(resistenciaMaxima * 1.5), resistenciaMaxima - novoValor));
+        foundry.utils.setProperty(changes, `${resourcePath}.dano`, novoDano);
+      }
+      // Recompute the resource values so the bar stays consistent
+      const nextDano = numberValue(foundry.utils.getProperty(changes, `${resourcePath}.dano`));
+      if (actor.type === "personagem") {
+        const habilidades = asArrayValue(system.habilidades);
+        const bonusResistencia = habilidades.reduce((total, h) => total + resistanceBonusForAbility(h), 0);
+        const resistenciaBase = Math.min(15, 10 + bonusResistencia);
+        const resistenciaTemporaria = Math.max(0, numberValue(system.resistenciaTemporaria));
+        const resistenciaMaxima = resistenciaBase + resistenciaTemporaria;
+        foundry.utils.setProperty(changes, `${resourcePath}.resources.resistencia.value`, Math.max(0, resistenciaMaxima - nextDano));
+        foundry.utils.setProperty(changes, `${resourcePath}.resources.resistencia.max`, resistenciaMaxima);
+      } else if (actor.type === "criatura") {
+        const resistenciaMaxima = Math.max(1, numberValue(system.resistencia, 10));
+        foundry.utils.setProperty(changes, `${resourcePath}.resources.resistencia.value`, Math.max(0, resistenciaMaxima - nextDano));
+        foundry.utils.setProperty(changes, `${resourcePath}.resources.resistencia.max`, resistenciaMaxima);
+      }
+    }
+
+    if (incomingResources.energia?.value !== undefined && actor.type === "personagem") {
+      const energiaMaxima = supernaturalEnergyMaximum(system);
+      const novaEnergia = Math.max(0, Math.min(energiaMaxima, numberValue(incomingResources.energia.value)));
+      foundry.utils.setProperty(changes, `${resourcePath}.energia`, novaEnergia);
+      foundry.utils.setProperty(changes, `${resourcePath}.resources.energia.value`, novaEnergia);
+      foundry.utils.setProperty(changes, `${resourcePath}.resources.energia.max`, energiaMaxima);
     }
   });
 
