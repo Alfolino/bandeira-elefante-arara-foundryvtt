@@ -39,6 +39,7 @@ const ARMAS_CATALOGO = [
   { nome: "Arco e flecha", tipoHabilidade: "Arqueria", maos: "2", alcance: "Longa distância", dano: 1, recarga: "", notas: "" },
   { nome: "Arcabuz", tipoHabilidade: "Armas de fogo", maos: "2", alcance: "Longa distância", dano: 3, recarga: "1 rodada", notas: "Uma rodada para recarregar entre tiros." },
   { nome: "Besta", tipoHabilidade: "Armas mecânicas", maos: "2", alcance: "Longa distância", dano: 2, recarga: "1 rodada", notas: "Uma rodada para recarregar entre tiros." },
+  { nome: "Chute", tipoHabilidade: "Capoeira", maos: "0", alcance: "Corpo a corpo", dano: 1, recarga: "", notas: "Ataque desarmado com Capoeira; causa 1 ponto de dano." },
   { nome: "Espada de lâmina larga", tipoHabilidade: "Armas de corte", maos: "2", alcance: "Corpo a corpo", dano: 2, forcaBonus: true, recarga: "", notas: "Exige Força física 1; dano 3 com Força física 3." },
   { nome: "Faca", tipoHabilidade: "Armas de corte", maos: "1", alcance: "Corpo a corpo", dano: 1, recarga: "", notas: "" },
   { nome: "Faca de arremesso", tipoHabilidade: "Armas de arremesso", maos: "1 (arremessar) / 1 (esfaquear)", alcance: "Curta distância ou corpo a corpo", dano: 1, recarga: "", notas: "No corpo a corpo, utiliza Armas de corte." },
@@ -53,6 +54,7 @@ const ARMAS_CATALOGO = [
   { nome: "Pistola", tipoHabilidade: "Armas de fogo", maos: "1", alcance: "Média distância", dano: 2, recarga: "1 rodada", notas: "Uma rodada para recarregar entre tiros." },
   { nome: "Porrete", tipoHabilidade: "Armas de golpe", maos: "1", alcance: "Corpo a corpo", dano: 2, recarga: "", notas: "" },
   { nome: "Rapieira", tipoHabilidade: "Esgrima", maos: "1", alcance: "Corpo a corpo", dano: 2, recarga: "", notas: "" },
+  { nome: "Soco", tipoHabilidade: "Boxe", maos: "0", alcance: "Corpo a corpo", dano: 1, recarga: "", notas: "Ataque desarmado com Boxe; causa 1 ponto de dano." },
   { nome: "Zarabatana", tipoHabilidade: "Armas de sopro", maos: "2", alcance: "Média distância", dano: 1, recarga: "", notas: "" }
 ].sort((a, b) => a.nome.localeCompare(b.nome, "pt-BR"));
 
@@ -363,6 +365,7 @@ Hooks.once("init", async function () {
         nome: arma.nome ?? "",
         tipoHabilidade: arma.tipoHabilidade ?? "",
         maos: arma.maos ?? "",
+        maosLabel: this._weaponHandsLabel(arma.maos),
         alcance: arma.alcance ?? "",
         dano: this._number(arma.dano, 1),
         forcaBonus: Boolean(arma.forcaBonus),
@@ -536,6 +539,21 @@ Hooks.once("init", async function () {
 
     _normalizeName(value) {
       return String(value || "").trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase();
+    }
+
+    _persistentActor() {
+      if (this.actor?.type !== "personagem") return this.actor;
+      return game.actors?.get(this.actor.token?.actorId)
+        || game.actors?.get(this.actor.id)
+        || this.actor;
+    }
+
+    _weaponHandsLabel(value) {
+      const text = String(value ?? "").trim();
+      if (!text || text === "0") return "desarmado";
+      if (text === "1") return "1 mão";
+      if (text === "2") return "2 mãos";
+      return text;
     }
 
     _catalogEntry(name) {
@@ -1348,7 +1366,7 @@ Hooks.once("init", async function () {
           <input type="checkbox" name="armasSelecionadas" value="${this._escape(arma.nome)}" />
           <span class="weapon-catalog-name">${this._escape(arma.nome)}</span>
           <span>${this._escape(arma.tipoHabilidade)}</span>
-          <span>${this._escape(arma.maos)}</span>
+          <span>${this._escape(this._weaponHandsLabel(arma.maos))}</span>
           <span>${this._escape(arma.alcance)}</span>
           <strong>${arma.dano}${arma.forcaBonus ? " (3)" : ""}</strong>
         </label>`).join("");
@@ -1630,9 +1648,13 @@ Hooks.once("init", async function () {
       const powerDamage = Math.max(0, this._number(escolha.effect.dano));
       const target = powerDamage ? this._targetedToken("aplicar o dano do poder") : null;
       if (powerDamage && !target?.actor) return;
-      const energia = Math.min(this._supernaturalEnergyMaximum(), this._number(this.actor.system.energia));
+      const persistentActor = this._persistentActor();
+      const energiaMaxima = persistentActor === this.actor
+        ? this._supernaturalEnergyMaximum()
+        : supernaturalEnergyMaximum(persistentActor.system || {});
+      const energia = Math.min(energiaMaxima, this._number(persistentActor.system.energia));
       if (custo > energia) return ui.notifications.warn("Energia insuficiente para usar este poder.");
-      await this.actor.update({ "system.energia": energia - custo });
+      await persistentActor.update({ "system.energia": energia - custo });
       await this._evaluatePowerTest({
         poder,
         effect: escolha.effect,
@@ -1892,7 +1914,12 @@ Hooks.once("init", async function () {
     return CONST.TOKEN_DISPLAY_MODES?.ALWAYS ?? 50;
   };
 
-  const setDefaultTokenResourceBars = changes => {
+  const desiredTokenActorLink = type => type === "personagem";
+
+  const setDefaultTokenResourceBars = (changes, type = "") => {
+    if (["personagem", "criatura"].includes(type)) {
+      foundry.utils.setProperty(changes, "prototypeToken.actorLink", desiredTokenActorLink(type));
+    }
     foundry.utils.setProperty(changes, "prototypeToken.displayName", tokenNameDisplayMode());
     foundry.utils.setProperty(changes, "prototypeToken.displayBars", tokenBarsDisplayMode());
     foundry.utils.setProperty(changes, "prototypeToken.bar1.attribute", "resources.resistencia");
@@ -1905,8 +1932,9 @@ Hooks.once("init", async function () {
     const update = {};
     setResourceChanges(update, actor.type, actor.system || {});
     if (!actor.getFlag(BANDEIRA_ID, "tokenResourcesConfigured")) {
-      setDefaultTokenResourceBars(update);
+      setDefaultTokenResourceBars(update, actor.type);
     } else {
+      if (actor.prototypeToken?.actorLink !== desiredTokenActorLink(actor.type)) foundry.utils.setProperty(update, "prototypeToken.actorLink", desiredTokenActorLink(actor.type));
       if (actor.prototypeToken?.displayName !== tokenNameDisplayMode()) foundry.utils.setProperty(update, "prototypeToken.displayName", tokenNameDisplayMode());
       if (!actor.prototypeToken?.bar1?.attribute) foundry.utils.setProperty(update, "prototypeToken.bar1.attribute", "resources.resistencia");
       if (!actor.prototypeToken?.bar2?.attribute) foundry.utils.setProperty(update, "prototypeToken.bar2.attribute", "resources.energia");
@@ -1917,6 +1945,23 @@ Hooks.once("init", async function () {
     }
     if (!Object.keys(flattened).length) return;
     await actor.update(foundry.utils.expandObject(flattened));
+  };
+
+  const syncPlacedPersonagemTokens = async () => {
+    if (!game.user?.isGM) return;
+    for (const scene of game.scenes || []) {
+      const updates = [];
+      for (const token of scene.tokens || []) {
+        const baseActor = game.actors?.get(token.actorId);
+        if (baseActor?.type !== "personagem" || token.actorLink) continue;
+        updates.push({
+          _id: token.id,
+          actorLink: true,
+          name: baseActor.name
+        });
+      }
+      if (updates.length) await scene.updateEmbeddedDocuments("Token", updates);
+    }
   };
 
   const askDamageAmount = async (amount, actorName = "alvo") => {
@@ -2095,7 +2140,15 @@ Hooks.once("init", async function () {
 
   patchCombatInitiative();
 
+  const baseActorForTokenActor = (actor, tokenDocument = null) => {
+    if (!actor || actor.type !== "personagem") return actor;
+    return game.actors?.get(tokenDocument?.actorId)
+      || game.actors?.get(actor.id)
+      || actor;
+  };
+
   const applyDamageToActor = async (actor, amount) => {
+    actor = baseActorForTokenActor(actor);
     const damage = Math.max(0, numberValue(amount));
     if (!actor || damage <= 0) return false;
     const system = actor.system || {};
@@ -2158,7 +2211,7 @@ Hooks.once("init", async function () {
       const baseAmount = numberValue(button.dataset.amount);
       const targetUuid = button.dataset.targetUuid;
       const document = targetUuid ? await fromUuid(targetUuid) : null;
-      const actor = document?.actor || document;
+      const actor = baseActorForTokenActor(document?.actor || document, document);
       if (!actor) return ui.notifications.error("Não foi possível encontrar o alvo para aplicar o dano.");
       const amount = await askDamageAmount(baseAmount, actor.name);
       if (amount === null) return;
@@ -2179,6 +2232,7 @@ Hooks.once("init", async function () {
     if (!["personagem", "criatura"].includes(actor?.type)) return;
     const changes = {
       prototypeToken: {
+        actorLink: desiredTokenActorLink(actor.type),
         displayName: tokenNameDisplayMode(),
         displayBars: tokenBarsDisplayMode(),
         bar1: { attribute: "resources.resistencia" },
@@ -2259,6 +2313,31 @@ Hooks.once("init", async function () {
       ? "actorData.system"
       : "delta.system";
 
+    if (actor.type === "personagem") {
+      const baseActor = baseActorForTokenActor(actor, tokenDocument);
+      if (baseActor && baseActor !== actor) {
+        const baseSystem = baseActor.system || system;
+        const update = {};
+        if (incomingResources.resistencia?.value !== undefined) {
+          const novoValor = numberValue(incomingResources.resistencia.value);
+          const habilidades = asArrayValue(baseSystem.habilidades);
+          const bonusResistencia = habilidades.reduce((total, h) => total + resistanceBonusForAbility(h), 0);
+          const resistenciaBase = Math.min(15, 10 + bonusResistencia);
+          const resistenciaTemporaria = Math.max(0, numberValue(baseSystem.resistenciaTemporaria));
+          const resistenciaMaxima = resistenciaBase + resistenciaTemporaria;
+          const novoDano = Math.max(0, Math.min(resistenciaMaxima, resistenciaMaxima - novoValor));
+          foundry.utils.setProperty(update, "system.dano", novoDano);
+        }
+        if (incomingResources.energia?.value !== undefined) {
+          const energiaMaxima = supernaturalEnergyMaximum(baseSystem);
+          const novaEnergia = Math.max(0, Math.min(energiaMaxima, numberValue(incomingResources.energia.value)));
+          foundry.utils.setProperty(update, "system.energia", novaEnergia);
+        }
+        if (Object.keys(foundry.utils.flattenObject(update)).length) baseActor.update(update);
+        return false;
+      }
+    }
+
     if (incomingResources.resistencia?.value !== undefined) {
       const novoValor = numberValue(incomingResources.resistencia.value);
       if (actor.type === "personagem") {
@@ -2311,6 +2390,7 @@ Hooks.once("init", async function () {
     for (const actor of game.actors || []) {
       await syncActorResources(actor);
     }
+    await syncPlacedPersonagemTokens();
     await seedCreatureCompendium();
   });
 
